@@ -4,8 +4,8 @@
     Desenvolvido por: Jayme Sanches Filho
     Instituição: Universidade Cruzeiro do Sul
     Disciplina: Desenvolvimento Front-End para Web
-    Experiência prática — Entrega 1 (Fundamentos e Estruturação)
-    Data: 16/10/2025
+    Experiência prática — Entrega 2 (Estilização e Leiautes)
+    Data: 30/10/2025
  -->
 
 <!DOCTYPE html> 
@@ -14,6 +14,7 @@
 <html lang="pt-BR">
 
     <head>
+        <title>Projeto KOLENU | Início</title>
         <meta charset="UTF-8">
 
         <!-- CONFIGURA A ÁREA VISÍVEL E ESCALA INICIAL PARA DISPOSITIVOS MÓVEIS (RESPONSIVE DESIGN) -->
@@ -22,39 +23,107 @@
         <!-- DEFINE A DESCRIÇÃO DA PÁGINA PARA MOTORES DE BUSCA E REDES SOCIAIS -->
         <meta name="description" content="Projeto Kolenu — Combate ao antissemitismo através da educação e do diálogo.">
 
+        <!-- DEFINE O ARQUIVO DE ESTILIZAÇÃO (CSS) -->
+        <link rel="stylesheet" href="css/styles.css">
+
         <!-- DEFINE O FAVICON -->
         <link rel="icon" type="image/x-icon" href="img/favicon/favicon.ico">
         <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
         <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
-
-        <title>Projeto Kolenu | Faça parte!</title>
     </head>
 
     <body>
+
+        <!-- ALERT: NOTA EDUCATIVA -->
+                <div class="alert-educational">
+                    <div class="alert-preview">
+                        <span>Você Sabia?</span>
+                    </div>
+                    
+                    <div class="alert-content">
+                        <h3>Sempre vigilantes!</h3>
+                        <p>O antissemitismo é uma ameaça persistente que se adapta e se atualiza através dos séculos.<br>
+                            A educação e a conscientização têm papel fundamental no combate à desinformação,
+                            criando leitores críticos que saibam diferenciar verdades e inverdades na <em>web</em>.
+                        </p>
+                        <div class="alert-source">
+                            <strong>Projeto KOLENU</strong>
+                        </div>
+                    </div>
+                </div>
+
+        <!-- MODAL: CTA — REPORTE DE INCIDENTES -->
+        <div class="modal">
+            <label for="modal-toggle" class="modal-btn">📢 REPORTE INCIDENTES</label>
+            <input type="checkbox" id="modal-toggle" class="modal-checkbox">
+            <div class="modal-overlay">
+                <div class="modal-content">
+                    <h3>NÃO SE CALE!</h3>
+                    <p>
+                        Se você testemunhou ou foi vítima de discriminação antissemita, estamos aqui para ajudar.
+                        <br>Envie-nos uma mensagem com o máximo de detalhes possível acerca do ocorrido, e nossa equipe
+                        avaliará o caso com cuidado e responsabilidade.
+                        <br>Seu relato é extremamente importante para nosso mapeamento de incidentes antissemitas pelo país.
+                    </p>
+                    <div class="modal-contacts">
+                        <div class="contact-item">
+                            <strong>📧 E-mail:</strong>
+                            <span>contato@kolenu.org.br</span>
+                        </div>
+                    </div>
+                    <p class="modal-note">Todas as denúncias são tratadas com sigilo absoluto.</p>
+                    <label for="modal-toggle" class="modal-close">Fechar</label>
+                </div>
+            </div>
+        </div>       
+
         <header>
-            <h1>Projeto Kolenu</h1>
-            <nav aria-label="Menu de navegação principal">
-                <ul>
+
+            <!-- NAV: MENU DE NAVEGAÇÃO -->
+            <nav aria-label="Menu de navegação">
+                
+                <!-- MENU HAMBÚRGUER (MOBILE) -->
+                <input type="checkbox" id="menu-toggle" class="menu-toggle">
+                <label for="menu-toggle" class="menu-button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+                
+                <ul class="nav-menu">
                     <li><a href="index.html">Início</a></li>
-                    <li><a href="projetos.html">Projetos</a></li>
-                    <li><a href="cadastro.html">Apoie-nos</a></li>
+                    
+                    <!-- ITEM COM SUBMENU DROPDOWN (DESKTOP) -->
+                    <li class="dropdown">
+                        <a href="projetos.html" class="dropdown-toggle">Iniciativas</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="projetos.html#spark">KOLENU Spark</a></li>
+                            <li><a href="projetos.html#echo">KOLENU Echo</a></li>
+                            <li><a href="projetos.html#nexus">KOLENU Nexus</a></li>
+                            <li><a href="projetos.html#watch">KOLENU Watch</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="cadastro.html">Apoie</a></li>
                 </ul>
             </nav>
         </header>
-
+        
         <main>
+            
             <!-- HERO SECTION — PRIMEIRA IMPRESSÃO VISUAL -->
             <section class="hero">
+                <h1>Projeto Kolenu</h1>
                 <img src="img/global-hero.webp" alt="Logo do Projeto KOLENU em azul. A palavra KOLENU aparece em fonte de peso maior, 
                 com a letra K maior que as demais, e um Magen David dentro da letra O. Duas faixas azuis passam por cima e por baixo da 
                 palavra, reminescentes da bandeira de Israel.">
-                <h2>Junte sua voz à nossa!</h2>
             </section>
+
 
             <!-- CONVITE PARA DOAÇÃO E MEIOS DE PAGAMENTO -->
             <section class="doacao">
-                <h2>Faça uma doação!</h2>
+                <h2>QUERO DOAR</h2>
                 <p>Ajude-nos a manter nossos projetos e levar nossa voz a 
                     mais pessoas doando qualquer valor pelos meios abaixo.</p>
                 <article class="doacao-pix">
@@ -72,7 +141,7 @@
                 </article>
                 
                 <article class="ja-doou">
-                    <h2>Já doou?</h2>
+                    <h3>Já doou?</h3>
                     <p>Envie-nos o comprovante do PIX ou da transferência bancária
                     para o email <strong>querodoar@kolenu.org.br</strong>
                     e te enviaremos o recibo comprovando a doação.</p>
@@ -80,27 +149,44 @@
             </section>
 
             <section class="voluntariado">
-                <h2>Deseja fazer parte de uma de nossas iniciativas?</h2>
+                <h2>QUERO FAZER PARTE</h2>                
                 <article class="voluntariado-cta">
-                    <h3>Adoraremos ter você junto conosco nessa caminhada!</h3>
-                    <p>Use o formulário abaixo para se cadastrar como voluntário,
-                    e entraremos em contato assim que possível com mais detalhes.</p>
+                    <p>Use o formulário abaixo para se cadastrar como voluntário.
+                        Entraremos em contato assim que possível com detalhes acerca
+                        da iniciativa que você escolheu.</p>
                 </article>
                 
-                <!-- FORMULÁRIO DE CADASTRO PARA VOLUNTARIADO (SIMULADO)
-                action="#" INDICA QUE O FORMULÁRIO NÃO SERÁ ENVIADO (NÃO HÁ RECURSOS BACK-END PARA TANTO) -->
-                <form action="#" method="post">
+                <!-- FORMULÁRIO DE CADASTRO PARA VOLUNTARIADO (SIMULADO; HÁ RECURSOS BACK-END PARA ENVIO REAL) -->
+                <!-- CAMPOS COM VALIDAÇÃO NATIVA HTML5, E MÁSCARA ONDE NECESSÁRIO -->                               
+                <form action="#form-enviado" method="post">
+                    
+                <!-- ALERT: CONFIRMAÇÃO DE ENVIO DO FORMULÁRIO (SIMULADO; NÃO HÁ RECURSOS BACK-END) -->
+                <input type="checkbox" id="alert-form-toggle" class="alert-form-checkbox">
+                <div class="alert-form-overlay"></div>
+                <div class="alert-form">
+                    <div class="alert-form-content">
+                        <span class="alert-form-success">✓</span>
+                        <h3>CADASTRO ENVIADO COM SUCESSO</h3>
+                        <p>Obrigado por se inscrever como voluntário no Projeto KOLENU. 
+                            Entraremos em contato em breve para lhe passar mais informações 
+                            a respeito da iniciativa que você escolheu.</p>
+                        <label for="alert-form-toggle" class="alert-form-close">Fechar</label>
+                    </div>
+                </div>
 
-                    <!-- FIELDSET 1: INFORMAÇÕES PESSOAIS -->
-                    <!-- CAMPOS COM VALIDAÇÃO NATIVA HTML5, E MÁSCARA ONDE NECESSÁRIO -->
+                    <!-- FIELDSET 1: INFORMAÇÕES PESSOAIS -->                    
                      <fieldset>
                         <legend>Informações Pessoais</legend>
 
                         <div>
                             <label for="nome">Nome:</label>
                             <input type="text" id="nome" name="nome" required
-                                   pattern="[A-Za-zÀ-ÿ\s\-']{2,50}"
-                                   placeholder="Seu nome completo">
+                                   placeholder="Seu nome completo"
+<<<<<<< HEAD
+                                   pattern="[A-Za-zÀ-ÿ\s\-']{2,50}">
+=======
+                                   pattern="[A-Za-zÀ-ÿ\s']{2,}">
+>>>>>>> cc99715 ((CSS3 avançado, sistemas de design, leiautes responsivos com Grid e Flexbox, componentes de interface acessíveis))
                         </div>
                         
                         <div>
@@ -130,10 +216,8 @@
                     </fieldset>
 
                     <!-- FIELDSET 2: ENDEREÇO -->
-                    <!-- CAMPOS COM VALIDAÇÃO NATIVA HTML5, E MÁSCARA ONDE NECESSÁRIO -->
                     <fieldset>
                         <legend>Endereço</legend>
-
                         <div>
                             <label for="rua">Rua:</label>
                             <input type="text" id="rua" name="rua" required
@@ -152,8 +236,10 @@
                             <label for="cidade">Cidade:</label>
                             <input type="text" id="cidade" name="cidade" required
                                    placeholder="Digite o nome da cidade.">
+                        </div>
 
-                            <!-- CAMPO ESTADO COM MENU DROPDOWN, IDEAL PARA LISTA FIXA DE OPÇÕES --> 
+                        <div>
+                            <!-- CAMPO "ESTADO" COM MENU DROPDOWN --> 
                             <label for="estado">Estado:</label>
                             <select id="estado" name="estado" required>
                                 <option value="">Clique para selecionar</option>
@@ -197,7 +283,8 @@
                     
                     <!-- FIELDSET 3: INICIATIVAS DE VOLUNTARIADO -->
                     <fieldset>
-                        <legend>De qual das iniciativas Kolenu você gostaria de participar?</legend>
+                        <legend>De qual das iniciativas Kolenu
+                            <br>você gostaria de participar?</legend>
                         <select id="iniciativa" name="iniciativa" required>
                             <option value="">Clique para selecionar</option>
                             <option value="escolha-spark">KOLENU Spark</option>
@@ -206,35 +293,47 @@
                             <option value="escolha-watch">KOLENU Watch</option>
                         </select>
                     </fieldset>
-                    
-                    <button type="submit">Enviar meu cadastro</button>
+                    <label for="alert-form-toggle" class="submit-btn">Enviar meu cadastro</label>
                 </form>
-            </section>
-        
+            </section>        
+            
         </main>
 
-        <!-- FORMAS DE CONTATO, REDES SOCIAIS, E DOCUMENTAÇÃO LEGAL (SIMBÓLICA)-->
-        <footer>
-            <section>
-            <h3>Contato:</h3>
-            <p>📧 <a href="mailto:contato@kolenu.org.br">contato@kolenu.org.br</a></p>
-            <p>📞 <a href="tel:+5512123456789">(12) 12345-6789</a></p>
-            </section>
-            
-            <section>
-                <h3>Acompanhe nosso trabalho nas redes sociais</h3>
-                <p><a href="#" aria-label="Siga-nos no Instagram"> <img src="img/icon-sns-ig.png" alt="Instagram"> Instagram</a></p>
-                <p><a href="#" aria-label="Siga-nos no X"> <img src="img/icon-sns-x.png" alt="X, o antigo Twitter"> X.com</a></p>
-                <p><a href="#" aria-label="Inscreva-se em nosso canal no Youtube"> <img src="img/icon-sns-yt.png" alt="Youtube"> Youtube</a></p>
-            </section>           
-            
-            <section class="legal">
-                <h3>Termos e Privacidade</h3>
-                <p><a href="#">Política de Privacidade</a> | 
-                <a href="#">Termos de Uso</a></p>
-            </section>     
+        <!-- FOOTER COM GRID DE 12 COLUNAS CUSTOMIZADO -->
+        <!-- CONTATO, REDES SOCIAIS, E DOCUMENTAÇÃO LEGAL (SIMBÓLICA)-->
+        <footer class="grid-12">
+            <div class="col-4">
+                <section class="footer-contact">
+                    <h3>Contato</h3>
+                    <p>📧 <a href="mailto:contato@kolenu.org.br">contato@kolenu.org.br</a></p>
+                    <p>📞 <a href="tel:+5512123456789">(12) 12345-6789</a></p>
+                </section>
+            </div>
 
-            <p>&copy; 2025 Projeto Kolenu. Todos os direitos reservados.</p>
+            <div class="col-4">
+                <section class="footer-sns">
+                    <h3>Redes Sociais</h3>
+                    <p><a href="#" aria-label="Instagram"><img src="img/icon-sns-ig.png" alt="Instagram"> Instagram</a></p>
+                    <p><a href="#" aria-label="X"><img src="img/icon-sns-x.png" alt="X"> X.com</a></p>
+                    <p><a href="#" aria-label="YouTube"><img src="img/icon-sns-yt.png" alt="YouTube"> YouTube</a></p>
+                </section>
+            </div>
+            
+            <div class="col-4">
+                <section class="footer-legal">
+                    <h3>Termos e Privacidade</h3>
+                    <p><a href="#">Política de Privacidade</a></p>
+                    <p><a href="#">Termos de Uso</a></p>
+                </section>
+            </div>
+            
+            <!-- COPYRIGHT NOTICE -->
+            <div class="col-12">
+                <p class="footer-copyright">&copy; 2025 Projeto Kolenu. Todos os direitos reservados.</p>
+            </div>
         </footer>
+
+        
+
     </body>
 </html>
