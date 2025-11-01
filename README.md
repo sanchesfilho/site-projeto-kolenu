@@ -4,7 +4,7 @@
 **Instituição:** Universidade Cruzeiro do Sul  
 **Disciplina:** Desenvolvimento Front-End para Web  
 *Experiência prática*  
-**Data:** 31/10/2025  
+**Data:** 01/11/2025  
 
 ## DESCRIÇÃO
 Projeto acadêmico desenvolvido para a disciplina de Desenvolvimento Front-end para Web.  
@@ -13,14 +13,18 @@ Plataforma web completa que permite gerenciamento de atividades, divulgação de
 ## ESTRUTURA
 ```
 site-projeto-kolenu/  
-├── index.html          # Página inicial institucional  
-├── projetos.html       # Listagem de iniciativas da ONG  
-├── cadastro.html       # Cadastro de voluntários e informações para doadores  
-│   assets              # Assets variados
-│   └── fonts           # Fontes customizadas
-├── img/                # Assets visuais  
-│   └── favicon/        # Assets de favicon
-└── README.md           # Documentação  
+├── index.html              # Página inicial (base para SPA e templates JavaScript)  
+├── assets                  # Assets variados  
+│   └── fonts               # Fontes customizadas  
+├── img/                    # Assets visuais   
+│   └── favicon/            # Assets de favicon  
+├── css/                    # Arquivos CSS3  
+│   └── styles.css          # Arquivo de estilos  
+├── js/                     # Arquivos JavaScript ES6+  
+│   └── templates.js        # Gerenciador de templates dinâmicos JavaScript
+│   └── spa-router.js       # Roteador client-side SPA com hash
+│   └── form-validator.js   # Validador de formulário em tempo real
+└── README.md               # Documentação  
 ...
 ```
 ## ENTREGAS REALIZADAS
@@ -44,8 +48,14 @@ site-projeto-kolenu/
 *- Sistema de badges e tags para categorização de conteúdo*  
 *- Media queries avançadas para 5 tamanhos de dispositivos*  
 
-## ENTREGAS PREVISTAS
-**Entrega III:** Interatividade e Funcionalidades (JavaScript)  
+**Entrega III:** Interatividade e Funcionalidades (JavaScript ES6+)  
+*- Sistema de validação avançada de formulários com feedback visual em tempo real com máscaras automáticas*  
+*- Arquitetura Single Page Application (SPA) com roteamento client-side*  
+*- Sistema de templates dinâmicos JavaScript para gerenciamento de conteúdo*  
+*- Navegação por hash com suporte a âncoras e scroll inteligente*  
+*- Sistema de logs para debugging e monitoramento de funcionalidades*  
+
+## ENTREGAS PREVISTAS 
 **Entrega IV:** Versionamento, Acessibilidade e Deploy  
 
 ## FONTES UTILIZADAS
