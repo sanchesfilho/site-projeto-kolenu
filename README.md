@@ -16,9 +16,10 @@ site-projeto-kolenu/
 ├── index.html          # Página inicial institucional  
 ├── projetos.html       # Listagem de iniciativas da ONG  
 ├── cadastro.html       # Cadastro de voluntários e informações para doadores  
-│   assets              # Assets variados
+├── assets              # Assets variados
 │   └── fonts           # Fontes customizadas
 ├── img/                # Assets visuais
+│   └── favicon/        # Assets de favicon  
 ├── css/                # Arquivos CSS3
 │   └── styles.css      # Arquivo de estilos 
 └── README.md           # Documentação  
