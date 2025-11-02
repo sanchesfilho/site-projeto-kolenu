@@ -543,7 +543,7 @@ if (typeof FormValidator !== 'undefined') {
     window.FormValidator = FormValidator;
 }
 
-// SISTEMA DE INICIALIZAÇÃO
+// SISTEMA DE INICIALIZAÇÃO INTELIGENTE
 const initializeFormValidator = () => {
     if (window.formValidatorInstance) {
         console.log('🔄 Validador já inicializado - ignorando duplicata');
@@ -560,28 +560,40 @@ const initializeFormValidator = () => {
     return false;
 };
 
-// INICIALIZAÇÃO
-if (!initializeFormValidator()) {
-    console.log('⏳ Formulário não encontrado - aguardando carregamento...');
+// INICIALIZAÇÃO CONDICIONAL — EXECUTA APENAS EM PÁGINAS COM FORMULÁRIO
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // DELAY PARA CARREGAMENTO COMPLETO EM APLICAÇÕES SPA
+        setTimeout(() => {
+            const form = document.getElementById('form-cadastro');
+            if (form) {
+                initializeFormValidator();
+                console.log('✅ Validador inicializado na página de cadastro');
+            } else {
+                console.log('ℹ️  Validador não requerido nesta página');
+            }
+        }, 300);
+    });
+} else {
     
-    const validationAttempts = setInterval(() => {
-        if (initializeFormValidator()) {
-            console.log('✅ Validador inicializado via verificação contínua');
-            clearInterval(validationAttempts);
-        }
-    }, 100);
-    
-    setTimeout(() => {
-        clearInterval(validationAttempts);
-        if (!window.formValidatorInstance) {
-            console.log('⏰ Timeout: Formulário não carregado após 10 segundos');
-        }
-    }, 10000);
+    // VERIFICAÇÃO IMEDIATA PARA PÁGINAS PRÉ-CARREGADAS
+    const form = document.getElementById('form-cadastro');
+    if (form) {
+        initializeFormValidator();
+        console.log('✅ Validador inicializado em página carregada');
+    } else {
+        console.log('ℹ️  Validador não requerido nesta página');
+    }
 }
 
-// COMPATIBILIDADE COM CARREGAMENTO TRADICIONAL
-document.addEventListener('DOMContentLoaded', function() {
-    if (!window.formValidatorInstance) {
-        initializeFormValidator();
-    }
+// SUPORTE SPA — REINICIALIZAÇÃO AUTOMÁTICA EM MUDANÇAS DE ROTA
+window.addEventListener('hashchange', () => {
+    setTimeout(() => {
+        const form = document.getElementById('form-cadastro');
+        if (form && !window.formValidatorInstance) {
+            console.log('🔄 Inicializando validador na nova rota SPA');
+            initializeFormValidator();
+        }
+    }, 200);
 });
