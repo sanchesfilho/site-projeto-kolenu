@@ -10,6 +10,7 @@
 
 // EVENT LISTENER PRINCIPAL — DETECTA MUDANÇAS NA URL (HASH) PARA NAVEGAÇÃO
 window.addEventListener('hashchange', function() {
+    
     // CAPTURA HASH COMPLETA DA URL (EX: "#/PROJETOS#SPARK")
     const fullHash = window.location.hash;
     
