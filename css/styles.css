@@ -3,8 +3,8 @@ PLATAFORMA WEB – ONG
 DESENVOLVIDO POR: JAYME SANCHES FILHO
 INSTITUIÇÃO: UNIVERSIDADE CRUZEIRO DO SUL
 DISCIPLINA: DESENVOLVIMENTO FRONT—END PARA WEB
-EXPERIÊNCIA PRÁTICA — ENTREGA 3 (INTERATIVIDADE E FUNCIONALIDADES)
-DATA: 31/10/2025
+EXPERIÊNCIA PRÁTICA — ENTREGA 4 (VERSIONAMENTO, ACESSIBILIDADE E DEPLOY)
+DATA: 02/11/2025
 */
 
 /*
@@ -15,12 +15,13 @@ DATA: 31/10/2025
 :root {
 
     /* CORES */
+    /* PALETA: MODO CLARO */
     --blue-1: #E0EBFF;
     --blue-2: #3498db;
     --blue-3: #0038B8;
     --blue-4: #2c3e50;
 
-    --gray-1: #7f8c8d;
+    --gray-1: #5d6d7e;
     --gray-2: #2c3e50;
 
     --gold: #f39c12;
@@ -31,6 +32,54 @@ DATA: 31/10/2025
     --text-dark: #001E60;
     --background: #F7F5F2;
     --background-alt: #F2F0ED;
+
+    /* PALETA: MODO ESCURO */
+    --darkmode-blue-1: #0A1931;
+    --darkmode-blue-2: #1E3A8A;
+    --darkmode-blue-3: #3B82F6;
+    --darkmode-blue-4: #60A5FA;
+
+    --darkmode-gray-1: #9CA3AF;
+    --darkmode-gray-2: #6B7280;
+    --darkmode-gray-3: #374151;
+    --darkmode-gray-4: #1F2937;
+
+    --darkmode-background: #000614;
+    --darkmode-background-alt: #000002;
+    
+    --darkmode-text: #F9FAFB;
+    --darkmode-text-muted: #D1D5DB;
+    
+    /* PALETA: ALTO CONTRASTE */
+    --highcontrast-background: #000000;
+    --highcontrast-foreground: #FFFFFF;
+    --highcontrast-accent: #FFFF00;
+    --highcontrast-border: #FFFFFF;
+    --highcontrast-text: #FFFFFF;
+    --highcontrast-link: #00FFFF;
+    --highcontrast-visited: #FF00FF;
+    --highcontrast-focus: #FFFF00;  
+      
+    /* PALETA: CORES SEMÂNTICAS PARA ACESSIBILIDADE */
+    --success-color: #10B981;
+    --warning-color: #F59E0B;
+    --error-color: #EF4444;
+    --info-color: #3B82F6;
+    
+    /* PALETA ATUAL: PARA CONTROLE DINÂMICO */
+    --current-background: var(--background);
+    --current-background-alt: var(--background-alt);
+    --current-text: var(--text-dark);
+    --current-text-muted: var(--gray-1);
+    --current-primary: var(--blue-3);
+    --current-secondary: var(--blue-2);
+    --current-accent: var(--gold);
+    --current-border: var(--blue-1);
+    --current-nav-bg: var(--pastel);
+    
+    /* CONTROLES DE MODO  */
+    --is-dark-mode: 0;
+    --is-high-contrast: 0;
         
     /* TIPOGRAFIA */
     --fw-light: 300;
@@ -67,14 +116,82 @@ DATA: 31/10/2025
     --nav-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* SISTEMA DE GRID CUSTOMIZADO (12 COLUNAS) */
-.grid-12 {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--space-md);
-    width: 100%;
+/* DETECÇÃO AUTOMÁTICA DE PREFERÊNCIAS DO SISTEMA */
+/* MODO ESCURO: ATIVAÇÃO AUTOMÁTICA QUANDO O SISTEMA PREFERE ESCURO */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --is-dark-mode: 1;
+        --current-background: var(--darkmode-background);
+        --current-background-alt: var(--darkmode-background-alt);
+        --current-text: var(--darkmode-text);
+        --current-text-muted: var(--darkmode-text-muted);
+        --current-primary: var(--darkmode-blue-3);
+        --current-secondary: var(--darkmode-blue-2);
+        --current-accent: var(--gold);
+        --current-border: var(--darkmode-blue-1);
+        --current-nav-bg: var(--darkmode-background-alt);
+    }
 }
 
+/* MODO CLARO: RESETA PARA O PADRÃO DO SISTEMA */
+@media (prefers-color-scheme: light) {
+    :root {
+        --is-dark-mode: 0;
+    }
+}
+
+/* MODO ALTO CONTRASTE */
+@media (prefers-contrast: high) {
+    :root {
+        --is-high-contrast: 1;
+        --current-background: var(--highcontrast-background);
+        --current-foreground: var(--highcontrast-foreground);
+        --current-text: var(--highcontrast-text);
+        --current-primary: var(--highcontrast-accent);
+        --current-border: var(--highcontrast-border);
+    }
+}
+
+/* CONTROLE MANUAL: CLASSES PARA ALTERNÂNCIA VIA JAVASCRIPT */
+/* MODO ESCURO MANUAL - DEVE VIR DEPOIS DAS MEDIA QUERIES */
+[data-theme="dark"] {
+    --is-dark-mode: 1;
+    --current-background: var(--darkmode-background);
+    --current-background-alt: var(--darkmode-background-alt);
+    --current-text: var(--darkmode-text);
+    --current-text-muted: var(--darkmode-text-muted);
+    --current-primary: var(--darkmode-blue-3);
+    --current-secondary: var(--darkmode-blue-2);
+    --current-accent: var(--gold);
+    --current-border: var(--darkmode-blue-1);
+    --current-nav-bg: var(--darkmode-background-alt);
+}
+
+/* MODO CLARO MANUAL */
+[data-theme="light"] {
+    --is-dark-mode: 0;
+    --is-high-contrast: 0;
+    --current-background: var(--background);
+    --current-background-alt: var(--background-alt);
+    --current-text: var(--text-dark);
+    --current-text-muted: var(--gray-1);
+    --current-primary: var(--blue-3);
+    --current-secondary: var(--blue-2);
+    --current-accent: var(--gold);
+    --current-border: var(--blue-1);
+    --current-nav-bg: var(--pastel);
+}
+
+/* MODO ALTO CONTRASTE MANUAL */
+[data-theme="highcontrast"] {
+    --is-high-contrast: 1;
+    --current-background: var(--highcontrast-background);
+    --current-foreground: var(--highcontrast-foreground);
+    --current-text: var(--highcontrast-text);
+    --current-primary: var(--highcontrast-accent);
+    --current-border: var(--highcontrast-border);
+    --current-nav-bg: var(--highcontrast-background);
+}
 /* CLASSES DE COLUNAS (GRID) */
 .col-1 { grid-column: span 1; }
 .col-2 { grid-column: span 2; }
@@ -101,22 +218,27 @@ body {
     font-family: var(--font-primary);
     font-size: 20px;
     line-height: 1.6;
-    color: var(--text-dark);
-    background-color: var(--background);
+    color: var(--current-text);
+    background-color: var(--current-background);
 }
 
+/* CABEÇALHO FIXO COM NAVEGAÇÃO PRINCIPAL */
 header { 
     grid-area: header; 
+    background: var(--current-nav-bg);
 }
 
+/* CONTEÚDO PRINCIPAL DA APLICAÇÃO */
 main { 
     grid-area: main; 
 }
 
+/* RODAPÉ COM INFORMAÇÕES DE CONTATO E LINKS */
 footer { 
     grid-area: footer; 
+    background: var(--current-background-alt);
+    color: var(--current-text);
 }
-
 /* FONTE CUSTOMIZADA — MONTSERRAT */
 /* Montserrat Variable Font
  * Copyright 2024 The Montserrat Project Authors (https://github.com/JulietaUla/Montserrat)
@@ -177,6 +299,7 @@ select,
 
 footer .footer-copyright {
     font-size: var(--text-xs);
+    color: var(--current-text-muted);
 }
 
 /* LAYOUT: GRID PRINCIPAL */
@@ -192,6 +315,7 @@ main {
     gap: var(--space-xl);
 }
 
+/* ESTILO PARA TÍTULOS H2 COM DESTAQUE VISUAL */
 h2 {
     font-weight: var(--fw-light);
     letter-spacing: -0.5px;
@@ -200,103 +324,186 @@ h2 {
     position: relative;
     padding-bottom: var(--space-sm);
     padding: var(--space-md);
-    background: rgba(0, 56, 184, 0.10);
     border-left: 4px solid var(--blue-3);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     text-align: center;   
+    background: rgba(var(--current-primary), 0.10);
+    border-left: 4px solid var(--current-primary);
 }
 
+/* CABEÇALHO COM EFEITO GLASSMORPHISM E POSIÇÃO FIXA */
 header {
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--current-nav-bg);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--current-border);
     padding: var(--space-md) 0;
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
+/* ESTILO PADRÃO PARA PARÁGRAFOS COM LIMITAÇÃO DE LARGURA */
 p {
     max-width: 65ch;
     line-height: 1.7;
     margin-bottom: var(--space-md);
     text-align: justify;
-    color: var(--gray-2);
+    color: var(--current-text-muted);
 }
 
+/* RODAPÉ COM SISTEMA DE GRID DE 12 COLUNAS */
 footer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(12, 1fr);
     gap: var(--space-xl);
-    background: var(--pastel);
-    border-top: 1px solid var(--gray-2);
-    color: var(--blue-4);
-    padding: var(--space-xl) var(--space-md);
+    background: var(--current-background-alt);
+    color: var(--current-text);
+    padding: var(--space-xl) var(--space-lg);
     margin-top: var(--space-xl);
     justify-items: center;
     text-align: center;
-}
-
-footer .footer-copyright {
-    grid-column: 2;
-    text-align: center;
-    padding-top: var(--space-lg);
-    border-top: 1px solid var(--gray-2);
-    margin-top: var(--space-lg);
-    max-width: none;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    border-top: 1px solid var(--current-border);
     width: 100%;
-    display: block;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    align-items: start;
 }
 
+/* COLUNAS DO RODAPÉ COM ESPAÇAMENTO DE 4 COLUNAS */
+footer .col-4 {
+    grid-column: span 4;
+    justify-self: center;
+    text-align: center; 
+}
+
+/* SEÇÕES DO RODAPÉ COM LAYOUT FLEX VERTICAL */
 footer section {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
+    align-items: center; 
+    width: 100%;
+    text-align: center;
 }
 
+/* ÁREA DE COPYRIGHT COM BORDA SUPERIOR */
+footer .footer-copyright {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--current-border);
+    margin-top: var(--space-lg);
+    width: 100%;
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--current-text-muted);
+}
+
+/* TÍTULOS DAS SEÇÕES DO RODAPÉ */
 footer h3 {
-    color: var(--blue-4);
+    color: var(--current-text-muted);
     font-size: 1.2rem;
     margin-bottom: var(--space-md);
 }
 
+/* PARÁGRAFOS DO RODAPÉ COM ALINHAMENTO CENTRAL */
 footer p {
     margin: 0;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-sm);
 }
 
+/* LINKS DO RODAPÉ COM EFEITO HOVER */
 footer a {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-sm);
     text-decoration: none;
-    color: var(--gray-1);
+    color: var(--current-text-muted);
     transition: color 0.3s ease;
 }
 
+/* EFEITO HOVER PARA LINKS DO RODAPÉ */
 footer a:hover {
-    color: var(--blue-3)
+    color: var(--current-primary);
 }
 
+/* ÍCONES DO RODAPÉ COM DIMENSÕES FIXAS */
 footer img {
     width: 20px;
     height: 20px;
 }
 
+/* ESTILOS PARA ÍCONES SVG NO FOOTER */
+.footer-sns img {
+    transition: all 0.3s ease;
+    filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0.5));
+    background: transparent; /* Remove qualquer fundo branco */
+}
+
+/* CORREÇÃO PARA CORES DOS ÍCONES POR TEMA */
+[data-theme="light"] .footer-sns img {
+    --icon-invert: 0.5;
+    background: transparent;
+}
+
+[data-theme="dark"] .footer-sns img {
+    --icon-invert: 0.8;
+    background: transparent;
+}
+
+[data-theme="highcontrast"] .footer-sns img {
+    --icon-invert: 1;
+    background: transparent;
+}
+
+/* EFEITO HOVER PARA ÍCONES SVG NAS REDES SOCIAIS */
+.footer-sns a:hover img {
+    filter: brightness(0) saturate(100%) invert(9%) sepia(99%) saturate(4152%) hue-rotate(215deg) brightness(97%) contrast(112%);
+    background: transparent;
+}
+
+/* LINKS DAS REDES SOCIAIS SEM FUNDO E COM BORDA ARREDONDADA */
+.footer-sns a {
+    background: transparent;
+    padding: 4px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+/* EFEITO HOVER COM ELEVAÇÃO E SEM ALTERAÇÃO DE FUNDO */
+.footer-sns a:hover {
+    background: transparent;
+    transform: translateY(-2px);
+}
+
+/* SISTEMA DE GRID DE 12 COLUNAS APLICADO AO BODY */
+body.grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto auto 1fr auto auto;
+    gap: 0;
+}
+
+/* ELEMENTOS FILHOS OCUPANDO TODAS AS COLUNAS DO GRID */
+body.grid-12 > * {
+    grid-column: 1 / -1;
+}
+
+/* FORMULÁRIO COM CARTA ELEVADA E SOMBRA SUAVE */
 form {
-    background: var(--white);
+    background: var(--current-background-alt);
     border-radius: var(--radius-lg);
     padding: var(--space-xl);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
+/* BOTÃO DE ENVIO COM GRADIENTE E EFEITO HOVER */
 button[type="submit"] {
-    background: linear-gradient(135deg, var(--blue-3), var(--blue-2));
+    background: linear-gradient(135deg, var(--current-primary), var(--current-secondary));
     color: white;
     padding: var(--space-md) var(--space-xl);
     border: none;
@@ -305,28 +512,32 @@ button[type="submit"] {
     transition: all 0.3s ease;
 }
 
+/* EFEITO DE ELEVAÇÃO NO HOVER DO BOTÃO */
 button[type="submit"]:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    box-shadow: 0 6px 20px var(--current-primary);
 }
 
+/* ESTILO UNIFICADO PARA CAMPOS DE FORMULÁRIO */
 input,
 textarea,
 select {
     padding: var(--space-md);
-    border: 2px solid var(--blue-1);
+    border: 2px solid var(--current-border);
     border-radius: var(--radius-lg);
-    background: var(--white);
+    background: var(--current-background);
     width: 100%;
     box-sizing: border-box;
     transition: all 0.3s ease;
-    color: var(--text-dark);
+    color: var(--current-text);
 }
 
+/* REMOÇÃO DO ESTILO PADRÃO DO SELECT */
 select {
     appearance: none;
 }
 
+/* INDICADOR VISUAL PARA CAMPOS VÁLIDOS */
 input:valid,
 textarea:valid,
 select:valid {
@@ -334,6 +545,7 @@ select:valid {
     background-color: var(--blue-1);
 }
 
+/* INDICADOR VISUAL PARA CAMPOS INVÁLIDOS */
 input:invalid:not(:focus):not(:placeholder-shown),
 textarea:invalid:not(:focus):not(:placeholder-shown),
 select:invalid:not(:focus) {
@@ -341,6 +553,7 @@ select:invalid:not(:focus) {
     background-color: rgba(243, 156, 18, 0.05);
 }
 
+/* INDICADOR DE CAMPO OBRIGATÓRIO */
 input:required,
 textarea:required,
 select:required {
@@ -348,6 +561,7 @@ select:required {
     padding-left: var(--space-md);
 }
 
+/* ESTADO DE FOCO COM REALCE E ANIMAÇÃO */
 input:focus,
 textarea:focus,
 select:focus {
@@ -357,10 +571,12 @@ select:focus {
     transform: scale(1.02);
 }
 
+/* ESPAÇAMENTO ENTRE GRUPOS DE CAMPOS */
 fieldset div {
     margin-bottom: var(--space-md);
 }
 
+/* DEFINIÇÃO DAS ÁREAS DO GRID PARA SEÇÕES PRINCIPAIS */
 .hero { grid-area: hero; }
 .sobre-nos { grid-area: sobre; }
 .missao { grid-area: missao; }
@@ -368,6 +584,7 @@ fieldset div {
 .porque-kolenu { grid-area: porque; }
 .cta { grid-area: cta; }
 
+/* ESTILO UNIFICADO PARA SEÇÕES DE CONTEÚDO */
 .sobre-nos,
 .missao,
 .valores,
@@ -378,86 +595,426 @@ fieldset div {
 .voluntariado {
     max-width: 800px;       
     margin: 0 auto;        
-    padding: 0 var(--space-md);
+    padding: var(--space-lg) var(--space-md);
+    background: var(--current-background);
+    color: var(--current-text);
+    border-radius: var(--radius-lg);
+    position: relative;
 }
 
+/* TÍTULOS DAS SEÇÕES COM DESTAQUE E BORDA LATERAL */
+.sobre-nos h2,
+.missao h2,
+.valores h2,
+.porque-kolenu h2,
+.cta h2,
+.projetos h2,
+.doacao h2,
+.voluntariado h2 {
+    font-weight: var(--fw-light);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    margin-bottom: var(--space-lg);
+    position: relative;
+    padding: var(--space-md);
+    border-left: 4px solid var(--current-primary);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    text-align: center;   
+    background: rgba(var(--current-primary-rgb, 0, 56, 184), 0.08);
+    color: var(--current-text);
+}
+
+/* CORREÇÃO PARA VISIBILIDADE NO MODO CLARO */
+[data-theme="light"] .sobre-nos h2,
+[data-theme="light"] .missao h2,
+[data-theme="light"] .valores h2,
+[data-theme="light"] .porque-kolenu h2,
+[data-theme="light"] .cta h2,
+[data-theme="light"] .projetos h2,
+[data-theme="light"] .doacao h2,
+[data-theme="light"] .voluntariado h2 {
+    background: rgba(0, 56, 184, 0.12);
+    color: var(--text-dark);
+    border-left: 4px solid var(--blue-3);
+}
+
+/* CORREÇÃO PARA VISIBILIDADE NO MODO ESCURO */
+[data-theme="dark"] .sobre-nos h2,
+[data-theme="dark"] .missao h2,
+[data-theme="dark"] .valores h2,
+[data-theme="dark"] .porque-kolenu h2,
+[data-theme="dark"] .cta h2,
+[data-theme="dark"] .projetos h2,
+[data-theme="dark"] .doacao h2,
+[data-theme="dark"] .voluntariado h2 {
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--darkmode-text);
+    border-left: 4px solid var(--darkmode-blue-3);
+}
+
+/* CORREÇÃO PARA ALTO CONTRASTE */
+[data-theme="highcontrast"] .sobre-nos h2,
+[data-theme="highcontrast"] .missao h2,
+[data-theme="highcontrast"] .valores h2,
+[data-theme="highcontrast"] .porque-kolenu h2,
+[data-theme="highcontrast"] .cta h2,
+[data-theme="highcontrast"] .projetos h2,
+[data-theme="highcontrast"] .doacao h2,
+[data-theme="highcontrast"] .voluntariado h2 {
+    background: var(--highcontrast-background);
+    color: var(--highcontrast-accent);
+    border-left: 4px solid var(--highcontrast-accent);
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.3);
+}
+
+/* ESTILOS PARA O CONTEÚDO DAS SEÇÕES */
+.sobre-nos p,
+.missao p,
+.valores p,
+.porque-kolenu p,
+.cta p,
+.projetos p,
+.doacao p,
+.voluntariado p {
+    max-width: 65ch;
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+    text-align: justify;
+    color: var(--current-text-muted);
+}
+
+/* CORREÇÃO ESPECÍFICA PARA O MODO CLARO - TEXTO VISÍVEL */
+[data-theme="light"] .sobre-nos p,
+[data-theme="light"] .missao p,
+[data-theme="light"] .valores p,
+[data-theme="light"] .porque-kolenu p,
+[data-theme="light"] .cta p,
+[data-theme="light"] .projetos p,
+[data-theme="light"] .doacao p,
+[data-theme="light"] .voluntariado p {
+    color: var(--gray-1);
+}
+
+/* CORREÇÃO ESPECÍFICA PARA O MODO ESCURO - TEXTO VISÍVEL */
+[data-theme="dark"] .sobre-nos p,
+[data-theme="dark"] .missao p,
+[data-theme="dark"] .valores p,
+[data-theme="dark"] .porque-kolenu p,
+[data-theme="dark"] .cta p,
+[data-theme="dark"] .projetos p,
+[data-theme="dark"] .doacao p,
+[data-theme="dark"] .voluntariado p {
+    color: var(--darkmode-text-muted);
+}
+
+
+/* SEÇÃO HERO COM GRADIENTE AZUL E CONTEÚDO CENTRALIZADO */
 .hero {
     background: linear-gradient(135deg, var(--blue-2) 0%, var(--blue-3) 100%);
     color: white;
-    padding: var(--space-xl) var(--space-md);
+    padding: calc(var(--space-xl) * 0.5) var(--space-md);
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
+/* MODO DARK - BEM MAIS ESCURO COM EFEITO ILUMINADO SUBTIL */
+[data-theme="dark"] .hero {
+    background: linear-gradient(135deg, var(--darkmode-background) 0%, var(--darkmode-background-alt) 100%);
+    border: 1px solid var(--darkmode-blue-1);
+    position: relative;
+}
+
+/* EFEITO ILUMINADO MUITO SUBTIL PARA MODO DARK */
+[data-theme="dark"] .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(45deg, transparent 97%, var(--darkmode-blue-3) 97%),
+        linear-gradient(-45deg, transparent 97%, var(--darkmode-blue-2) 97%);
+    background-size: 35px 35px;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+[data-theme="dark"] .hero h1,
+[data-theme="dark"] .hero h3 {
+    color: var(--darkmode-text);
+    text-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+[data-theme="dark"] .hero img {
+    border: 1px solid var(--darkmode-blue-3);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+    position: relative;
+    z-index: 2;
+}
+
+/* MODO HIGHCONTRAST - ESTILO MODERNO COM SUAS CORES (MANTIDO) */
+[data-theme="highcontrast"] .hero {
+    background: var(--highcontrast-background);
+    border: 3px solid var(--highcontrast-accent);
+    position: relative;
+}
+
+[data-theme="highcontrast"] .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(45deg, transparent 95%, var(--highcontrast-accent) 95%),
+        linear-gradient(-45deg, transparent 95%, var(--highcontrast-link) 95%);
+    background-size: 20px 20px;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+[data-theme="highcontrast"] .hero h1,
+[data-theme="highcontrast"] .hero h3 {
+    color: var(--highcontrast-accent);
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    font-weight: 900;
+    position: relative;
+    z-index: 2;
+}
+
+[data-theme="highcontrast"] .hero img {
+    border: 3px solid var(--highcontrast-accent);
+    box-shadow: 0 0 20px var(--highcontrast-accent);
+    position: relative;
+    z-index: 2;
+}
+
+/* IMAGEM DO HERO COM DIMENSÕES RESPONSIVAS E EFEITOS VISUAIS */
 .hero img {   
-    width: 60%;
+    width: 30%;
     height: auto;
-    margin-bottom: var(--space-md);
-    border-radius: 21px;       
-    box-shadow: 0 4px 21px rgba(0, 0, 0, 0.2);
+    margin: 0 auto calc(var(--space-md) * 0.5);
+    border-radius: 12px;       
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+    display: block;
+    transform-origin: center;
 }
 
+/* MODO DARK — EFEITO ILUMINADO FORTE EM AZUL ESCURO (IGUAL AO CONTRASTE) */
+[data-theme="dark"] .hero img {
+    border: 2px solid var(--darkmode-blue-3);
+    box-shadow: 
+        0 0 25px rgba(59, 130, 246, 0.6),
+        0 0 50px rgba(59, 130, 246, 0.4),
+        0 0 80px rgba(59, 130, 246, 0.3),
+        0 0 120px rgba(59, 130, 246, 0.2);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: gentle-float 6s ease-in-out infinite;
+    filter: brightness(1.05) contrast(1.1);
+    transform-origin: center;
+}
+
+[data-theme="dark"] .hero img:hover {
+    transform: scale(1.03) translateY(-8px);
+    box-shadow: 
+        0 0 35px rgba(59, 130, 246, 0.8),
+        0 0 70px rgba(59, 246, 255, 0.5),
+        0 0 100px rgba(59, 130, 246, 0.4),
+        0 0 150px rgba(30, 144, 255, 0.3);
+    filter: brightness(1.1) contrast(1.15);
+}
+
+/* ANIMAÇÃO DE FLUTUAÇÃO SUAVE PARA MODO DARK */
+@keyframes gentle-float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* EFEITO DE BRILHO INTENSO PARA IMAGEM NO MODO ALTO CONTRASTE */
+[data-theme="highcontrast"] .hero img {
+    border: 3px solid var(--highcontrast-accent);
+    box-shadow: 
+        0 0 25px var(--highcontrast-accent),
+        0 0 50px rgba(255, 255, 0, 0.7),
+        0 0 80px rgba(255, 255, 0, 0.5),
+        0 0 120px rgba(255, 255, 0, 0.3);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: gentle-float-contrast 6s ease-in-out infinite;
+    filter: brightness(1.1) contrast(1.2);
+    transform-origin: center; /* MANTÉM A CENTRALIZAÇÃO DURANTE ANIMAÇÃO */
+}
+
+[data-theme="highcontrast"] .hero img:hover {
+    transform: scale(1.03) translateY(-8px);
+    box-shadow: 
+        0 0 35px var(--highcontrast-accent),
+        0 0 70px rgba(255, 255, 0, 0.8),
+        0 0 100px rgba(255, 255, 0, 0.6),
+        0 0 150px rgba(255, 255, 0, 0.4);
+    filter: brightness(1.15) contrast(1.25);
+}
+
+/* ANIMAÇÃO DE FLUTUAÇÃO PARA MODO ALTO CONTRASTE */
+@keyframes gentle-float-contrast {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ANIMAÇÃO SUTIL PARA IMAGEM NO MODO CLARO */
+[data-theme="light"] .hero img {
+    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: gentle-breathe 8s ease-in-out infinite;
+    transform-origin: center;
+}
+
+/* EFEITO HOVER DISCRETO PARA IMAGEM NO MODO CLARO */
+[data-theme="light"] .hero img:hover {
+    transform: scale(1.015);
+    box-shadow: 
+        0 6px 25px rgba(0, 56, 184, 0.2),
+        0 3px 12px rgba(0, 56, 184, 0.15);
+}
+
+/* ANIMAÇÃO DE RESPIRAÇÃO SUTIL PARA MODO LIGHT */
+@keyframes gentle-breathe {
+    0%, 100% {
+        transform: scale(1) translateY(0px);
+    }
+    25% {
+        transform: scale(1.003) translateY(-2px);
+    }
+    50% {
+        transform: scale(1) translateY(0px);
+    }
+    75% {
+        transform: scale(0.997) translateY(2px);
+    }
+}
+
+/* TÍTULO PRINCIPAL DO HERO COM ESTILO MINIMALISTA */
 .hero h1 {
-    font-size: 1.2rem;
+    font-size: 0.7rem;
     font-weight: var(--fw-medium);
     color: rgba(255, 255, 255, 0.8);
-    margin-bottom: var(--space-sm);
+    margin-bottom: calc(var(--space-sm) * 0.5);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
+/* HERO ESPECÍFICA POR TEMA */
+/* HERO PADRÃO — MODO LIGHT */
+[data-theme="light"] .hero-default {
+    display: block;
+}
+
+[data-theme="light"] .hero-alternative {
+    display: none;
+}
+
+/* HERO ALTERNATIVA — MODOS DARK E HIGHCONTRAST */
+[data-theme="dark"] .hero-default,
+[data-theme="highcontrast"] .hero-default {
+    display: none;
+}
+
+[data-theme="dark"] .hero-alternative,
+[data-theme="highcontrast"] .hero-alternative {
+    display: block;
+}
+
+/* TRANSIÇÃO ELEGANTE ENTRE AS LOGOS HERO */
+.hero-default,
+.hero-alternative {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* ANIMAÇÃO DE ENTRADA SUAVE */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* SUBTÍTULO DO HERO COM LARGURA LIMITADA E ALINHAMENTO CENTRAL */
 .hero h3 {
-    font-size: 0.8rem;
+    font-size: 0.5rem;
     font-weight: var(--fw-light);
     color: white;
-    max-width: 600px;
+    max-width: 350px;
     margin: 0 auto;
-    line-height: 1.0;
+    line-height: 1.2;
 }
 
+/* LISTA DE VALORES SEM MARCADORES PADRÃO */
 .lista-valores {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
     list-style: none;
     padding: 0;
-    margin: var(--space-xl) 0;
 }
 
+/* CARDS DOS VALORES COM ELEVAÇÃO E EFEITO HOVER */
 .lista-valores li {
-    background: var(--background-alt);
+    background: var(--current-background-alt);
     padding: var(--space-lg);
     border-radius: var(--radius-lg);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--current-border); 
     transition: all 0.3s ease;
 }
 
+/* EFEITO DE ELEVAÇÃO AO PASSAR O MOUSE NOS CARDS */
 .lista-valores li:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
+/* TÍTULOS DOS VALORES COM ÍCONE DECORATIVO */
 .lista-valores h3 {
-    color: var(--blue-4);
+    color: var(--current-text);
     margin-bottom: var(--space-md);
     display: flex;
     align-items: center;
     gap: var(--space-sm);
 }
 
+/* ÍCONE ESTILIZADO ANTES DOS TÍTULOS DOS VALORES */
 .lista-valores h3::before {
     content: '✦';
-    color: var(--blue-3);
+    color: var(--current-primary);
     font-size: 1.5rem;
 }
 
+/* PARÁGRAFOS DA LISTA DE VALORES SEM LIMITAÇÃO DE LARGURA */
 .lista-valores p {
     max-width: none;
-    color: var(--blue-4);
+    color: var(--current-text);
     line-height: 1.6;
 }
 
+/* LISTA DE CALL-TO-ACTION COM LAYOUT HORIZONTAL */
 .cta-list {
+    color:var(--current-text);
     list-style: none;
     padding: 0;
     display: flex;
@@ -467,9 +1024,10 @@ fieldset div {
     margin: 0 auto;
 }
 
+/* CARDS DE AÇÃO COM GRADIENTE E DIMENSÕES MÍNIMAS */
 .cta-list li {
-    background: linear-gradient(135deg, var(--blue-3), var(--blue-2));
-    color: white;
+    background: linear-gradient(135deg, var(--current-primary), var(--current-secondary));
+    color: var(--current-text);
     padding: var(--space-lg);
     border-radius: var(--radius-lg);
     text-align: center;
@@ -485,66 +1043,100 @@ fieldset div {
     box-sizing: border-box;
 }
 
+/* GRADIENTE ALTERNATIVO PARA MODO ALTO CONTRASTE */
+[data-theme="highcontrast"] .cta-list li {
+    background: linear-gradient(135deg, var(--highcontrast-accent), var(--highcontrast-link));
+    color: var(--highcontrast-background);
+}
+
+/* CORES DE TEXTO ESPECÍFICAS PARA MODO ALTO CONTRASTE */
+[data-theme="highcontrast"] .cta-list li,
+[data-theme="highcontrast"] .cta-list li p,
+[data-theme="highcontrast"] .cta-list li a {
+    color: var(--highcontrast-background);
+}
+
+/* PARÁGRAFOS DOS CARDS COM ALINHAMENTO CENTRAL */
 .cta-list p {
     text-align: center;
-    color: white;
+    color: var(--current-text);
     margin: 0;
 }
 
+/* EFEITO DE ELEVAÇÃO E BRILHO NO HOVER DOS CARDS */
 .cta-list li:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+    box-shadow: 0 8px 25px var(--current-primary);
 }
 
+/* LINKS DOS CARDS COM COR BRANCA FIXA */
 .cta-list a {
     color: white;
     text-decoration: none;
 }
 
+/* EXCEÇÃO: MODO CLARO -> TEXTO BRANCO NOS CARDS CTA */
+[data-theme="light"] .cta-list li,
+[data-theme="light"] .cta-list li p,
+[data-theme="light"] .cta-list li a {
+    color: var(--white);
+}
+
+/* CONTAINER PRINCIPAL COM LARGURA MÁXIMA E CENTRALIZAÇÃO */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--space-md);
 }
 
+/* CLASSE UTILITÁRIA PARA LAYOUT DE GRID */
 .grid {
     display: grid;
     gap: var(--space-md);
 }
 
+/* CLASSE UTILITÁRIA PARA LAYOUT FLEXBOX */
 .flex {
     display: flex;
     gap: var(--space-sm);
 }
 
+/* SEÇÃO DE REDES SOCIAIS DO RODAPÉ CENTRALIZADA */
 .footer-sns {
     justify-self: center;
 }
+
+/* PARÁGRAFOS DAS REDES SOCIAIS COM ALINHAMENTO CENTRAL E ESPAÇAMENTO */
 .footer-sns p {
     margin: 0; 
-    display: grid;
- 
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: var(--space-xs);
 }
 
+/* PARÁGRAFOS DE CONTATO DO RODAPÉ COM ALINHAMENTO CENTRAL */
 .footer-contact p {
     margin: 0;
     display: flex;
-    align-items:flex-start;
+    align-items: center;
     gap: var(--space-xs);
-    padding-left: 10px;
+    padding-left: 0;
+    justify-content: center;
 }
 
+/* SEÇÃO DE PROJETOS COM LARGURA MÁXIMA E PADDING */
 .projetos {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--space-md);
 }
 
+/* CARDS DE PROJETOS COM ELEVAÇÃO E EFEITO HOVER */
 .projetos article {
-    background: var(--white);
+    background: var(--current-background-alt);
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--current-border);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     margin-bottom: var(--space-xl);
     padding: var(--space-xl);
@@ -552,13 +1144,15 @@ fieldset div {
     transition: all 0.3s ease;
 }
 
+/* EFEITO DE ELEVAÇÃO AO PASSAR O MOUSE NOS PROJETOS */
 .projetos article:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
+/* TÍTULOS DOS PROJETOS COM ESTILO DESTACADO */
 .projetos h3 {
-    color: var(--blue-3);
+    color: var(--current-primary);
     margin-bottom: var(--space-md);
     text-align: center;
     font-weight: var(--fw-medium);
@@ -567,11 +1161,12 @@ fieldset div {
     letter-spacing: 2px;
 }
 
+/* TÍTULO PRINCIPAL DA SEÇÃO DE PROJETOS */
 .projetos h2 {
-    background: rgba(0, 56, 184, 0.10);
+    background: var(--current-background);
     border-left: 4px solid var(--blue-3);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    color: var(--blue-4);
+    color: var(--current-text);
     font-weight: var(--fw-light);
     letter-spacing: -0.5px;
     line-height: 1.2;
@@ -582,7 +1177,7 @@ fieldset div {
     text-align: center;
 }
 
-
+/* IMAGENS DOS PROJETOS COM DIMENSÕES RESPONSIVAS */
 .projetos img {
     width: 100%;
     max-width: 600px;
@@ -593,80 +1188,88 @@ fieldset div {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* DESCRIÇÕES DOS PROJETOS COM ALINHAMENTO CENTRAL */
 .projetos p {
     text-align: center;
     line-height: 1.6;
-    color: var(--gray-2);
+    color: var(--current-text);
     margin-bottom: 0;
 }
 
+/* BORDA COLORIDA PARA OS PRIMEIROS CINCO PROJETOS */
 .projetos article:first-child,
 .projetos article:nth-child(2),
 .projetos article:nth-child(3),
 .projetos article:nth-child(4),
 .projetos article:nth-child(5) {
-    border-left: 4px solid var(--blue-3);
+    border-left: 4px solid var(--current-primary);
 }
 
-
+/* QR CODE PIX COM DIMENSÕES RESPONSIVAS E BORDA COLORIDA */
 .doacao-pix img {
-    max-width: 500px; /* ou o tamanho que preferir */
+    max-width: 500px;
     width: 25%;
     height: auto;
     display: block;
     margin: 0 auto;
     border-radius: var(--radius-md);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border: 2px solid var(--blue-3);
+    border: 2px solid var(--current-primary);
 }
 
+/* CARDS DE DOAÇÃO COM EFEITO INTERATIVO */
 .doacao-pix, .doacao-transferencia {
-    background: var(--white);
+    background: var(--current-background-alt);
     border-radius: var(--radius-lg);
     padding: var(--space-xl);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    border-left: 4px solid var(--blue-2);
+    border-left: 4px solid var(--current-primary);
     margin-bottom: var(--space-lg);
-
     transition: all 0.3s ease;
     cursor: pointer;
 }
 
+/* EFEITO HOVER PARA CARDS DE DOAÇÃO */
 .doacao-pix:hover, .doacao-transferencia:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
+/* COR ESPECÍFICA PARA BORDA DO CARD PIX */
 .doacao-pix {
-    border-left-color: var(--blue-2);
+    border-left-color: var(--current-secondary);
 }
 
+/* INDICADOR DE FOCO PARA LINKS DE CALL-TO-ACTION */
 .cta-list a:focus {
     outline: 2px solid var(--blue-2);
     outline-offset: 4px;
     transition: all 0.3s ease;
 }
 
+/* INDICADOR DE FOCO PARA LINKS DO RODAPÉ */
 .footer-contact a:focus,
 .footer-sns a:focus, 
 .footer-legal a:focus {
     outline: 2px solid var(--blue-2);
     outline-offset: 2px;
     transition: all 0.3s ease;
-
 }
 
+/* GRUPOS DE FORMULÁRIO COM ESPAÇAMENTO AMPLO */
 .form-group {
     margin-bottom: var(--space-xl);
 }
 
+/* LABELS DE FORMULÁRIO COM PESO TIPOGRÁFICO */
 .form-group label {
     display: block;
     margin-bottom: var(--space-sm);
     font-weight: 500;
-    color: var(--blue-4);
+    color: var(--current-text);
 }
 
+/* BOTÃO DE ENVIO COM DIMENSÕES AMPLIADAS */
 button[type="submit"] {
     padding: var(--space-lg) var(--space-xl);
     border-radius: var(--radius-lg);
@@ -674,45 +1277,54 @@ button[type="submit"] {
     min-height: 60px;
 }
 
+/* ESTADO DESABILITADO DO BOTÃO DE ENVIO */
 button[type="submit"]:disabled {
     background: var(--gray-1);
+    color: white;
     cursor: not-allowed;
     opacity: 0.6;
 }
 
+/* CHECKBOXES E RADIOS COM ESCALA AMPLIADA */
 input[type="checkbox"],
 input[type="radio"] {
     transform: scale(1.5);
     margin-right: var(--space-sm);
 }
 
+/* COR PERSONALIZADA PARA CHECKBOX MARCADO */
 input[type="checkbox"]:checked {
     accent-color: var(--blue-3);
 }
 
+/* COR PERSONALIZADA PARA RADIO BUTTON MARCADO */
 input[type="radio"]:checked {
     accent-color: var(--gold);
 }
 
+/* FIELDSET COM ESTILO DE CARTA E BORDA */
 fieldset {
-    border: 3px solid var(--blue-1);
+    border: 3px solid var(--current-border);
     border-radius: var(--radius-lg);
     padding: var(--space-xl);
     margin-bottom: var(--space-xl);
-    background: var(--white);
+    background: var(--current-background);
 }
 
+/* LEGENDAS DE FIELDSET COM DESTAQUE VISUAL */
 legend {
     font-weight: var(--fw-medium);
-    color: var(--blue-3);
+    color: var(--current-primary);
     padding: 0 var(--space-md);
 }
 
+/* PLACEHOLDER COM COR SEMI-TRANSPARENTE */
 ::placeholder {
-    color: var(--gray-1);
+    color: var(--current-text-muted);
     opacity: 0.7;
 }
 
+/* TEXTAREA COM ALTURA MÍNIMA E REDIMENSIONAMENTO */
 textarea {
     min-height: 150px;
     resize: vertical;
@@ -720,12 +1332,14 @@ textarea {
     font-family: var(--font-primary);
 }
 
+/* GRUPOS DE CAMPOS COM LAYOUT DE GRID */
 .field-group {
     display: grid;
     gap: var(--space-lg);
     margin-bottom: var(--space-xl);
 }
 
+/* MENSAGENS DE VALIDAÇÃO OCULTAS POR PADRÃO */
 .field-message {
     font-size: 1rem;
     margin-top: var(--space-sm);
@@ -734,6 +1348,7 @@ textarea {
     display: none;
 }
 
+/* EXIBIÇÃO DE MENSAGENS DE ERRO PARA CAMPOS INVÁLIDOS */
 input:invalid:not(:focus):not(:placeholder-shown) ~ .field-message,
 textarea:invalid:not(:focus):not(:placeholder-shown) ~ .field-message {
     display: block;
@@ -742,11 +1357,13 @@ textarea:invalid:not(:focus):not(:placeholder-shown) ~ .field-message {
     border: 2px solid var(--blue-2);
 }
 
+/* ESTADO DE CARREGAMENTO PARA BOTÕES */
 .button-loading {
     position: relative;
     color: transparent;
 }
 
+/* SPINNER ANIMADO PARA BOTÕES EM CARREGAMENTO */
 .button-loading::after {
     content: "";
     position: absolute;
@@ -761,11 +1378,13 @@ textarea:invalid:not(:focus):not(:placeholder-shown) ~ .field-message {
     animation: button-spin 1s linear infinite;
 }
 
+/* ANIMAÇÃO DE ROTAÇÃO PARA SPINNER */
 @keyframes button-spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
+/* MENSAGENS DE FEEDBACK DO FORMULÁRIO */
 .form-message {
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
@@ -774,18 +1393,21 @@ textarea:invalid:not(:focus):not(:placeholder-shown) ~ .field-message {
     font-size: 1.2rem;
 }
 
+/* MENSAGEM DE SUCESSO COM ESTILO POSITIVO */
 .form-message.success {
     background-color: var(--blue-1);
     border: 3px solid var(--blue-3);
     color: var(--blue-3);
 }
 
+/* MENSAGEM DE ERRO COM ESTILO DE ALERTA */
 .form-message.error {
     background-color: rgba(243, 156, 18, 0.1);
     border: 3px solid var(--blue-2);
     color: var(--blue-2);
 }
 
+/* SLIDER PERSONALIZADO PARA INPUT RANGE */
 input[type="range"] {
     width: 100%;
     height: 10px;
@@ -795,6 +1417,7 @@ input[type="range"] {
     margin: var(--space-md) 0;
 }
 
+/* THUMB PERSONALIZADO PARA SLIDER */
 input[type="range"]::-webkit-slider-thumb {
     appearance: none;
     width: 24px;
@@ -806,6 +1429,7 @@ input[type="range"]::-webkit-slider-thumb {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* GRUPOS DE CHECKBOX E RADIO COM LAYOUT VERTICAL */
 .checkbox-group,
 .radio-group {
     display: flex;
@@ -816,6 +1440,7 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: var(--radius-lg);
 }
 
+/* LABELS INTERATIVAS PARA CHECKBOX E RADIO */
 .checkbox-group label,
 .radio-group label {
     display: flex;
@@ -825,6 +1450,7 @@ input[type="range"]::-webkit-slider-thumb {
     transition: background 0.3s ease;
 }
 
+/* EFEITO HOVER PARA LABELS DE CHECKBOX E RADIO */
 .checkbox-group label:hover,
 .radio-group label:hover {
     background: var(--blue-1);
@@ -839,6 +1465,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: auto;
 }
 
+/* BOTÃO DO MODAL COM GRADIENTE VERMELHO E SOMBRA */
 .modal-btn {
   background: linear-gradient(135deg, #e74c3c, #c0392b);
   color: white;
@@ -855,15 +1482,18 @@ input[type="range"]::-webkit-slider-thumb {
   text-align: center;
 }
 
+/* EFEITO HOVER COM ESCALA E SOMBRA INTENSIFICADA */
 .modal-btn:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
 }
 
+/* CHECKBOX OCULTO PARA CONTROLE DO MODAL */
 .modal-checkbox {
   display: none;
 }
 
+/* OVERLAY ESCURO PARA FUNDO DO MODAL */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -877,6 +1507,7 @@ input[type="range"]::-webkit-slider-thumb {
   z-index: 1001;
 }
 
+/* CONTEÚDO PRINCIPAL DO MODAL */
 .modal-content {
   background: white;
   padding: 30px;
@@ -887,11 +1518,13 @@ input[type="range"]::-webkit-slider-thumb {
   border: 3px solid var(--blue-3);
 }
 
+/* TÍTULO DO MODAL COM COR DE DESTAQUE */
 .modal-content h3 {
   color: var(--blue-3);
   margin-bottom: 15px;
 }
 
+/* SEÇÃO DE CONTATOS COM FUNDO AZUL CLARO */
 .modal-contacts {
   background: var(--blue-1);
   padding: 20px;
@@ -900,18 +1533,21 @@ input[type="range"]::-webkit-slider-thumb {
   text-align: left;
 }
 
+/* ITENS DE CONTATO COM LAYOUT FLEX HORIZONTAL */
 .contact-item {
   margin: 10px 0;
   display: flex;
   justify-content: space-between;
 }
 
+/* NOTA INFORMATIVA COM ESTILO ITÁLICO */
 .modal-note {
   font-size: 0.9em;
   color: #666;
   font-style: italic;
 }
 
+/* BOTÃO DE FECHAR MODAL COM COR AZUL */
 .modal-close {
   background: var(--blue-3);
   color: white;
@@ -923,14 +1559,12 @@ input[type="range"]::-webkit-slider-thumb {
   transition: all 0.3s ease;
 }
 
+/* EFEITO HOVER PARA BOTÃO DE FECHAR */
 .modal-close:hover {
   background: var(--blue-2);
 }
 
-.modal-checkbox {
-  display: none;
-}
-
+/* ATIVAÇÃO DO MODAL VIA CHECKBOX */
 .modal-checkbox:checked ~ .modal-overlay {
   display: flex;
 }
@@ -943,6 +1577,7 @@ input[type="range"]::-webkit-slider-thumb {
   z-index: 1000;
 }
 
+/* MENSAGEM TOAST COM ANIMAÇÃO DE ENTRADA E SAÍDA */
 .toast-message {
   background: var(--blue-3);
   color: white;
@@ -955,6 +1590,7 @@ input[type="range"]::-webkit-slider-thumb {
              toastOut 0.5s ease 5s forwards;
 }
 
+/* ANIMAÇÃO DE ENTRADA DO TOAST */
 @keyframes toastIn {
   to {
     opacity: 1;
@@ -962,6 +1598,7 @@ input[type="range"]::-webkit-slider-thumb {
   }
 }
 
+/* ANIMAÇÃO DE SAÍDA DO TOAST */
 @keyframes toastOut {
   to {
     opacity: 0;
@@ -980,6 +1617,7 @@ input[type="range"]::-webkit-slider-thumb {
     z-index: 2;
 }
 
+/* BADGE BASE COM ESTILO COMPACTO E ELEVADO */
 .badge {
     padding: 6px 14px;
     border-radius: 20px;
@@ -992,23 +1630,27 @@ input[type="range"]::-webkit-slider-thumb {
     white-space: nowrap;
 }
 
+/* BADGE "NOVO" COM GRADIENTE AZUL */
 .badge.novo {
     background: linear-gradient(135deg, var(--blue-2), var(--blue-3));
 }
 
+/* BADGE "DESTAQUE" COM GRADIENTE DOURADO */
 .badge.destaque {
     background: linear-gradient(135deg, var(--gold), #d4690a);
 }
 
+/* BADGE "DESENVOLVIMENTO" COM GRADIENTE AZUL ESCURO */
 .badge.desenvolvimento {
     background: linear-gradient(135deg, var(--blue-2), var(--blue-4));
 }
 
+/* BADGE "CONCLUÍDO" COM GRADIENTE VERDE */
 .badge.concluido {
     background: linear-gradient(135deg, #27ae60, #229954);
 }
 
-/* TAGS PARA CATEGORIZAÇÃO */
+/* CONTAINER DE TAGS COM LAYOUT FLEX E QUEBRA */
 .tags {
     display: flex;
     gap: 8px;
@@ -1016,23 +1658,26 @@ input[type="range"]::-webkit-slider-thumb {
     margin-bottom: var(--space-lg);
 }
 
+/* TAG INDIVIDUAL COM ESTILO DE CÁPSULA E HOVER */
 .tag {
-    background: var(--blue-1);
-    color: var(--blue-3);
+    background: var(--current-background);
+    color: var(--current-primary);
     padding: 6px 12px;
     border-radius: 16px;
     font-size: 0.8rem;
     font-weight: 600;
-    border: 1px solid var(--blue-2);
+    border: 1px solid var(--current-border);
     transition: all 0.3s ease;
 }
 
+/* EFEITO HOVER COM INVERSÃO DE CORES E ELEVAÇÃO */
 .tag:hover {
-    background: var(--blue-3);
-    color: white;
+    background: var(--current-primary);
+    color: var(--current-background);
     transform: translateY(-2px);
 }
 
+/* TÍTULOS DOS ARTIGOS DE PROJETOS COM COR AZUL */
 .projetos article h3 {
     color: var(--blue-3);
     font-weight: var(--fw-bold);
@@ -1040,6 +1685,7 @@ input[type="range"]::-webkit-slider-thumb {
     text-align: center;
 }
 
+/* IMAGENS DOS PROJETOS COM DIMENSÕES CONTROLADAS */
 .projetos article img {
     width: 100%;
     max-width: 400px;
@@ -1051,17 +1697,20 @@ input[type="range"]::-webkit-slider-thumb {
     transition: transform 0.3s ease;
 }
 
+/* EFEITO DE ZOOM SUAVE AO PASSAR O MOUSE */
 .projetos article:hover img {
     transform: scale(1.02);
 }
 
+/* DESCRIÇÕES DOS PROJETOS COM ALINHAMENTO CENTRAL */
 .projetos article p {
     text-align: center;
     line-height: 1.6;
-    color: var(--gray-2);
+    color: var(--current-text);
     margin-bottom: 0;
 }
 
+/* POSICIONAMENTO DOS BADGES NO CANTO SUPERIOR DIREITO */
 .project-badges {
         top: 15px;
         right: 15px;
@@ -1070,7 +1719,7 @@ input[type="range"]::-webkit-slider-thumb {
 /* MENU DE NAVEGAÇÃO */
 nav {
     position: relative;
-    background: var(--nav-background);
+    background: var(--current-nav-bg);
     box-shadow: var(--nav-shadow);
     padding: 0 var(--space-md);
     height: var(--nav-height);
@@ -1079,6 +1728,7 @@ nav {
     justify-content: space-between;
 }
 
+/* MENU DE NAVEGAÇÃO PRINCIPAL COM LAYOUT FLEX */
 .nav-menu {
     display: flex;
     list-style: none;
@@ -1088,12 +1738,14 @@ nav {
     align-items: center;
 }
 
+/* ITENS DO MENU COM POSICIONAMENTO RELATIVO */
 .nav-menu > li {
     position: relative;
 }
 
+/* LINKS DO MENU COM EFEITOS DE TRANSFORMAÇÃO */
 .nav-menu > li > a {
-    color: var(--blue-4);
+    color: var(--current-text);
     text-decoration: none;
     font-weight: var(--fw-bold);
     padding: var(--space-sm) var(--space-md);
@@ -1104,6 +1756,7 @@ nav {
     overflow: hidden;
 }
 
+/* INDICADOR VISUAL INFERIOR PARA LINKS DO MENU */
 .nav-menu > li > a::before {
     content: '';
     position: absolute;
@@ -1111,25 +1764,29 @@ nav {
     left: 50%;
     width: 0;
     height: 2px;
-    background: var(--blue-3);
+    background: var(--current-primary);
     transition: all 0.3s ease;
     transform: translateX(-50%);
 }
 
+/* EXPANSÃO DO INDICADOR NO HOVER */
 .nav-menu > li > a:hover::before {
     width: 80%;
 }
 
+/* EFEITO HOVER COM MUDANÇA DE COR E ELEVAÇÃO */
 .nav-menu > li > a:hover {
-    color: var(--blue-3);
+    color: var(--current-primary);
     background: rgba(0, 56, 184, 0.05);
     transform: translateY(-1px);
 }
 
+/* CONTAINER PARA MENUS DROPDOWN */
 .dropdown {
     position: relative;
 }
 
+/* BOTÃO TOGGLE DO DROPDOWN COM ÍCONE */
 .dropdown-toggle {
     display: flex;
     align-items: center;
@@ -1137,6 +1794,7 @@ nav {
     cursor: pointer;
 }
 
+/* ÍCONE DE SETA PARA DROPDOWN */
 .dropdown-toggle::after {
     content: '▼';
     font-size: var(--text-xs);
@@ -1144,15 +1802,17 @@ nav {
     transition: transform 0.3s ease;
 }
 
+/* ROTAÇÃO DA SETA NO HOVER DO DROPDOWN */
 .dropdown:hover .dropdown-toggle::after {
     transform: rotate(180deg);
 }
 
+/* MENU DROPDOWN COM ANIMAÇÃO DE DESLIZAMENTO */
 .dropdown-menu {
     position: absolute;
     top: 100%;
     left: 0;
-    background: var(--pastel);
+    background: var(--current-nav-bg);
     min-width: 220px;
     padding: var(--space-sm) 0;
     border-radius: var(--radius-lg);
@@ -1164,40 +1824,47 @@ nav {
     transform: translateY(-10px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--current-border);
+    animation: slideDown 0.3s ease;
 }
 
+/* EXIBIÇÃO DO DROPDOWN NO HOVER */
 .dropdown:hover .dropdown-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
+/* ITENS DO MENU DROPDOWN SEM MARGEM */
 .dropdown-menu li {
     margin: 0;
 }
 
+/* LINKS DO DROPDOWN COM EFEITO DE DESLOCAMENTO */
 .dropdown-menu a {
     display: block;
     padding: var(--space-sm) var(--space-lg);
-    color: var(--blue-4);
+    color: var(--current-text);
     text-decoration: none;
     font-weight: 500;
     transition: all 0.2s ease;
     border-left: 3px solid transparent;
 }
 
+/* EFEITO HOVER PARA LINKS DO DROPDOWN */
 .dropdown-menu a:hover {
-    background: var(--blue-1);
-    color: var(--blue-3);
+    background: var(--current-background);
+    color: var(--current-primary);
     border-left-color: var(--blue-3);
     transform: translateX(4px);
 }
 
+/* CHECKBOX OCULTO PARA CONTROLE DO MENU MOBILE */
 .menu-toggle {
     display: none;
 }
 
+/* BOTÃO HAMBÚRGUER PARA MENU MOBILE */
 .menu-button {
     display: none;
     flex-direction: column;
@@ -1211,6 +1878,7 @@ nav {
     z-index: 1001;
 }
 
+/* BARRAS DO BOTÃO HAMBÚRGUER */
 .menu-button span {
     display: block;
     height: 3px;
@@ -1221,22 +1889,19 @@ nav {
     transform-origin: center;
 }
 
-.dropdown-menu {
-    animation: slideDown 0.3s ease;
-}
-
+/* TRANSFORMAÇÕES SUAVES PARA ELEMENTOS DO MENU */
 .nav-menu * {
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ALERT: NOTA EDUCATIVA COM HOVER */
+/* ALERTA EDUCATIVO COM EXPANSÃO LATERAL NO HOVER */
 .alert-educational {
     position: fixed;
     top: 50%;
     right: 0;
     transform: translateY(-50%);
-    background: var(--pastel);
-    border: 2px solid var(--blue-3);
+    background: var(--current-background-alt);
+    border: 2px solid var(--current-primary);
     border-right: none;
     border-radius: 15px 0 0 15px;
     padding: 15px;
@@ -1247,19 +1912,22 @@ nav {
     box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* EXPANSÃO DO ALERTA AO PASSAR O MOUSE */
 .alert-educational:hover {
     width: 300px;
-    background: var(--pastel);
-    border-color: var(--blue-3);
+    background: var(--current-background-alt);
+    border-color: var(--current-primary);
 }
 
+/* PREVIEW DO ALERTA COM TEXTO VERTICAL */
 .alert-preview {
     text-align: center;
     margin-bottom: 10px;
 }
 
+/* TEXTO VERTICAL ROTACIONADO PARA PREVIEW */
 .alert-preview span {
-    color: var(--blue-3);
+    color: var(--current-primary);
     font-weight: bold;
     font-size: 12px;
     writing-mode: vertical-rl;
@@ -1267,11 +1935,13 @@ nav {
     transform: rotate(180deg);
 }
 
+/* RESTAURAÇÃO DO TEXTO NO MODO HORIZONTAL */
 .alert-educational:hover .alert-preview span {
     writing-mode: horizontal-tb;
     transform: rotate(0deg);
 }
 
+/* CONTEÚDO DO ALERTA OCULTO INICIALMENTE */
 .alert-content {
     opacity: 0;
     max-height: 0;
@@ -1279,54 +1949,60 @@ nav {
     transition: all 0.3s ease;
 }
 
+/* EXIBIÇÃO DO CONTEÚDO NO HOVER */
 .alert-educational:hover .alert-content {
     opacity: 1;
     max-height: 500px;
 }
 
+/* TÍTULO DO CONTEÚDO DO ALERTA */
 .alert-content h3 {
-    color: var(--blue-3);
+    color: var(--current-primary);
     margin: 0 0 10px 0;
     font-weight: 600;
 }
 
+/* PARÁGRAFOS DO CONTEÚDO DO ALERTA */
 .alert-content p {
-    color: var(--blue-4);
+    color: var(--current-text);
     margin: 0 0 10px 0;
     line-height: 1.4;
 }
 
+/* ÊNFASE NO TEXTO DO ALERTA */
 .alert-content em {
-    color: var(--blue-3);
+    color: var(--current-primary);
     font-style: italic;
 }
 
+/* FONTE DA INFORMAÇÃO COM BORDA SUPERIOR */
 .alert-source {
     text-align: right;
     font-size: 0.8rem;
-    color: var(--blue-4);
-    border-top: 1px solid var(--blue-2);
+    color: var(--current-text-muted);
+    border-top: 1px solid var(--current-border);
     padding-top: 8px;
 }
 
+/* DESTAQUE PARA A FONTE DA INFORMAÇÃO */
 .alert-source strong {
-    color: var(--blue-3);
+    color: var(--current-primary);
 }
 
 /* FORMULÁRIO: VALIDAÇÃO VISUAL */
 /* CAMPOS VÁLIDOS */
 fieldset div input:valid:not(:placeholder-shown),
 fieldset div select:valid {
-    border-color: var(--blue-3);
-    background-color: var(--pastel);
+    border-color: var(--current-primary);
+    background-color: var(--current-background-alt);
     box-shadow: 0 0 0 2px rgba(0, 56, 184, 0.1);
 }
 
 /*CAMPOS INVÁLIDOS */
 fieldset div input:invalid:not(:focus):not(:placeholder-shown),
 fieldset div select:invalid:not(:focus) {
-    border-color: var(--alizarin);
-    background-color: rgba(227, 38, 54, 0.07);
+    border-color: var(--current-primary);
+    background-color: var(--current-background-alt);
     box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.1);
 }
 
@@ -1336,27 +2012,31 @@ fieldset div select:invalid:not(:focus) {
     50% { transform: scale(1.02); }
 }
 
+/* ANIMAÇÃO DE PULSO PARA CAMPOS INVÁLIDOS */
 fieldset div input:invalid:not(:focus):not(:placeholder-shown),
 fieldset div select:invalid:not(:focus) {
     animation: gentle-pulse 0.6s ease-in-out;
 }
 
+/* POSICIONAMENTO RELATIVO PARA GRUPOS DE CAMPOS */
 fieldset div {
     position: relative;
 }
 
-/* ESTADO DO BOTÃO BASEADO NA VALIDAÇÃO DO FORMULÁRIO */
+/* BOTÃO DESABILITADO PARA FORMULÁRIOS INVÁLIDOS */
 form:invalid .submit-btn {
     background: var(--gray-1);
     cursor: not-allowed;
     opacity: 0.7;
 }
 
+/* REMOÇÃO DE EFEITOS HOVER PARA BOTÃO DESABILITADO */
 form:invalid .submit-btn:hover {
     transform: none;
     box-shadow: none;
 }
 
+/* BOTÃO ATIVO PARA FORMULÁRIOS VÁLIDOS */
 form:valid .submit-btn {
     background: var(--blue-3);
     cursor: pointer;
@@ -1392,43 +2072,51 @@ fieldset div select:invalid:not(:focus) {
     color: var(--gray-2);
 }
 
+/* PADRÃO VISUAL PARA CAMPOS OBRIGATÓRIOS NÃO PREENCHIDOS */
 fieldset div input:required:placeholder-shown,
 fieldset div select:required:invalid {
     background: linear-gradient(45deg, transparent 95%, var(--blue-2) 95%);
     background-size: 8px 8px;
 }
 
+/* TRANSFORMAÇÕES SUAVES PARA CAMPOS DE FORMULÁRIO */
 fieldset div input,
 fieldset div select {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* EFEITO DE ELEVAÇÃO NO FOCO DOS CAMPOS */
 fieldset div input:focus,
 fieldset div select:focus {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 56, 184, 0.15);
 }
 
+/* ESTILO DE VALIDAÇÃO PARA ÚLTIMO SELECT VÁLIDO */
 fieldset:last-of-type select:valid {
     border-left: 6px solid var(--blue-3);
     background: var(--pastel);
 }
 
+/* INDICADOR VISUAL PARA ÚLTIMO SELECT INVÁLIDO */
 fieldset:last-of-type select:invalid:not(:focus) {
     background: linear-gradient(45deg, transparent 95%, var(--blue-2) 95%);
     background-size: 8px 8px;;
 }
 
+/* ESTILO DE FIELDSET VÁLIDO COM BORDA COLORIDA */
 fieldset:valid {
-    border-color: var(--blue-2);
-    border-left: 6px solid var(--blue-2);
+    border-color: var(--current-primary);
+    border-left: 6px solid var(--current-primary);
     background: linear-gradient(to right, transparent 95%, var(--blue-1) 95%);
 }
 
+/* TRANSFORMAÇÕES ESPECÍFICAS PARA ELEMENTOS SELECT */
 fieldset > select {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ESTADO VÁLIDO PARA SELECTS COM REALCE VISUAL */
 fieldset > select:valid {
     border-color: var(--blue-3);
     background-color: var(--pastel);
@@ -1436,6 +2124,7 @@ fieldset > select:valid {
     border-left: 6px solid var(--blue-3);
 }
 
+/* ESTADO INVÁLIDO PARA SELECTS COM COR DE ALERTA */
 fieldset > select:invalid:not(:focus) {
     border-color: var(--alizarin);
     background-color: rgba(227, 38, 54, 0.07);
@@ -1443,24 +2132,27 @@ fieldset > select:invalid:not(:focus) {
     border-left: 2px solid var(--alizarin);
 }
 
-/* ANIMAÇÃO DE PROGRESSO SUTIL */
+/* ANIMAÇÃO DE BRILHO PARA INDICAR PROGRESSO */
 @keyframes progress-glow {
     0% { box-shadow: 0 0 0 0 rgba(0, 56, 184, 0.3); }
     70% { box-shadow: 0 0 0 6px rgba(0, 56, 184, 0); }
     100% { box-shadow: 0 0 0 0 rgba(0, 56, 184, 0); }
 }
 
+/* ANIMAÇÃO DE BRILHO PARA CAMPOS VÁLIDOS EM FOCO */
 fieldset div input:valid:not(:placeholder-shown):focus,
 fieldset div select:valid:focus {
     animation: progress-glow 1.5s ease-in-out;
 }
 
+/* ESTILO PARA CAMPO COMPLEMENTO QUANDO PREENCHIDO */
 fieldset div input#complemento:not(:placeholder-shown) {
     border-color: var(--blue-3);
     background-color: var(--pastel);
     box-shadow: 0 0 0 2px rgba(0, 56, 184, 0.1);
 }
 
+/* EFEITO DE FOCO PARA CAMPO COMPLEMENTO */
 fieldset div input#complemento:focus {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 56, 184, 0.15);
@@ -1468,39 +2160,43 @@ fieldset div input#complemento:focus {
     outline: none;
 }
 
+/* ANIMAÇÃO DE BRILHO PARA COMPLEMENTO PREENCHIDO */
 fieldset div input#complemento:not(:placeholder-shown):focus {
     animation: progress-glow 1.5s ease-in-out;
 }
 
+/* INDICADOR VISUAL PARA COMPLEMENTO VAZIO */
 fieldset div input#complemento:placeholder-shown {
     background: linear-gradient(45deg, transparent 95%, var(--blue-2) 95%);
     background-size: 8px 8px;
 }
 
+/* ESTILO DE FIELDSET QUANDO COMPLEMENTO ESTÁ PREENCHIDO */
 fieldset:has(input#complemento:not(:placeholder-shown)) {
     border-color: var(--blue-2);
     background: linear-gradient(to right, transparent 95%, var(--blue-1) 95%);
 }
 
+/* INDICADOR LATERAL PARA COMPLEMENTO PREENCHIDO */
 fieldset div input#complemento:not(:placeholder-shown) {
     border-right: 3px solid var(--blue-3);
 }
-
 /* FORM: ENVIO REAL DE DADOS */
 .form-message.success {
-    background: linear-gradient(135deg, var(--blue-1), var(--pastel));
-    border: 3px solid var(--blue-3);
-    color: var(--blue-4);
+    background: linear-gradient(135deg, var(--current-background), var(--current-background-alt));
+    border: 3px solid var(--current-primary);
+    color: var(--current-text);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
     text-align: center;
     margin-bottom: var(--space-xl);
-    box-shadow: 0 8px 30px rgba(0, 56, 184, 0.15);
+    box-shadow: 0 8px 30px var(--current-primary);
     animation: fadeInUp 0.6s ease;
 }
 
+/* TÍTULO DA MENSAGEM DE SUCESSO COM ÍCONE DE CONFIRMAÇÃO */
 .form-message.success h3 {
-    color: var(--blue-3);
+    color: var(--current-primary);
     font-size: var(--text-title-2);
     margin-bottom: var(--space-md);
     display: flex;
@@ -1509,13 +2205,14 @@ fieldset div input#complemento:not(:placeholder-shown) {
     gap: var(--space-sm);
 }
 
+/* ÍCONE DE CHECK VERDE PARA MENSAGEM DE SUCESSO */
 .form-message.success h3::before {
     content: '✓';
     font-size: 2rem;
     color: #27ae60;
 }
 
-/* LOADING SPINNER */
+/* CONTAINER DO SPINNER DE CARREGAMENTO */
 .loading-spinner {
     text-align: center;
     padding: var(--space-xl);
@@ -1525,6 +2222,7 @@ fieldset div input#complemento:not(:placeholder-shown) {
     border: 2px dashed var(--blue-2);
 }
 
+/* SPINNER ANIMADO COM BORDAS COLORIDAS */
 .spinner {
     width: 50px;
     height: 50px;
@@ -1535,6 +2233,7 @@ fieldset div input#complemento:not(:placeholder-shown) {
     margin: 0 auto var(--space-md);
 }
 
+/* TEXTO DO SPINNER DE CARREGAMENTO */
 .loading-spinner p {
     color: var(--blue-3);
     font-weight: 600;
@@ -1542,11 +2241,11 @@ fieldset div input#complemento:not(:placeholder-shown) {
     text-align: center;
 }
 
-/* BOTÃO DE ENVIO COM ESTADOS */
+/* BOTÃO DE ENVIO COM ESTADOS INTERATIVOS */
 .submit-btn {
     display: inline-block;
     padding: 1rem 2rem;
-    background: var(--blue-3);
+    background: var(--current-primary);
     color: white;
     border: none;
     border-radius: 8px;
@@ -1559,12 +2258,14 @@ fieldset div input#complemento:not(:placeholder-shown) {
     min-height: 60px;
 }
 
+/* EFEITO HOVER PARA BOTÃO DE ENVIO ATIVO */
 .submit-btn:hover:not(:disabled) {
-    background: var(--blue-2);
+    background: var(--current-secondary);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* ESTADO DESABILITADO DO BOTÃO DE ENVIO */
 .submit-btn:disabled {
     background: var(--gray-1);
     cursor: not-allowed;
@@ -1573,11 +2274,13 @@ fieldset div input#complemento:not(:placeholder-shown) {
     box-shadow: none;
 }
 
+/* ESTADO DE CARREGAMENTO PARA BOTÃO DE ENVIO */
 .submit-btn.button-loading {
     position: relative;
     color: transparent;
 }
 
+/* SPINNER CENTRALIZADO PARA BOTÃO EM CARREGAMENTO */
 .submit-btn.button-loading::after {
     content: "";
     position: absolute;
@@ -1592,12 +2295,13 @@ fieldset div input#complemento:not(:placeholder-shown) {
     animation: spin 1s linear infinite;
 }
 
-/* ANIMAÇÕES */
+/* ANIMAÇÕES PRINCIPAIS DO SISTEMA */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
+/* ANIMAÇÃO DE ENTRADA COM DESLOCAMENTO VERTICAL */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -1609,26 +2313,27 @@ fieldset div input#complemento:not(:placeholder-shown) {
     }
 }
 
-/* ESTADOS DO FORMULÁRIO DURANTE O ENVIO */
+/* ESTADO VISUAL PARA FORMULÁRIO EM PROCESSAMENTO */
 .form-submitting {
     opacity: 0.7;
     pointer-events: none;
 }
 
+/* FUNDO AZUL CLARO PARA CAMPOS DURANTE ENVIO */
 .form-submitting input,
 .form-submitting select,
 .form-submitting textarea {
     background-color: var(--blue-1);
 }
 
-
-/* ESTILOS DE VALIDAÇÃO DO FORMULÁRIO */
+/* INDICADOR VISUAL PARA CAMPOS VÁLIDOS */
 .field-valid {
     border-color: #27ae60 !important;
     background-color: rgba(39, 174, 96, 0.05) !important;
     box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.1) !important;
 }
 
+/* INDICADOR VISUAL PARA CAMPOS INVÁLIDOS */
 .field-invalid {
     border-color: #e74c3c !important;
     background-color: rgba(231, 76, 60, 0.05) !important;
@@ -1636,6 +2341,7 @@ fieldset div input#complemento:not(:placeholder-shown) {
     animation: gentle-shake 0.5s ease-in-out;
 }
 
+/* MENSAGENS DE ERRO COM ESTILO DE ALERTA */
 .field-message {
     display: none;
     font-size: 0.9rem;
@@ -1647,16 +2353,19 @@ fieldset div input#complemento:not(:placeholder-shown) {
     color: var(--alizarin);
 }
 
+/* ESTADO DE CARREGAMENTO PARA BOTÕES */
 .button-loading {
     opacity: 0.7;
     cursor: not-allowed !important;
 }
 
+/* CONTAINER DO SPINNER DE CARREGAMENTO */
 .loading-spinner {
     text-align: center;
     padding: 20px;
 }
 
+/* SPINNER ALTERNATIVO PARA CARREGAMENTO */
 .spinner {
     border: 4px solid #f3f3f3;
     border-top: 4px solid #3498db;
@@ -1667,33 +2376,32 @@ fieldset div input#complemento:not(:placeholder-shown) {
     margin: 0 auto 10px;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
+/* ANIMAÇÃO DE TREMOR PARA CAMPOS INVÁLIDOS */
 @keyframes gentle-shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-5px); }
     75% { transform: translateX(5px); }
 }
 
+/* ANIMAÇÃO DE ENTRADA LATERAL */
 @keyframes slideIn {
     from { transform: translateX(100%); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
 }
 
-/* ANIMAÇÕES PARA O ALERTA DE SUCESSO */
+/* ANIMAÇÃO DE APARECIMENTO PROGRESSIVO */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
+/* ANIMAÇÃO DE DESAPARECIMENTO PROGRESSIVO */
 @keyframes fadeOut {
     from { opacity: 1; }
     to { opacity: 0; }
 }
 
+/* ANIMAÇÃO DE DESLIZAMENTO VERTICAL */
 @keyframes slideDown {
     from { 
         opacity: 0;
@@ -1705,6 +2413,446 @@ fieldset div input#complemento:not(:placeholder-shown) {
     }
 }
 
+/* SISTEMA DE NAVEGAÇÃO POR TECLADO */
+/* ESTADO ATIVO DO DROPDOWN — VISUAL PARA NAVEGAÇÃO POR TECLADO */
+.dropdown.active .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    display: block;
+}
+
+/* INDICADOR VISUAL DE ESTADO EXPANDIDO — ROTAÇÃO DA SETA */
+.dropdown.active .dropdown-toggle::after {
+    transform: rotate(180deg);
+}
+
+/* ESTILOS DE FOCO PARA USUÁRIOS DE TECLADO — VISIBILIDADE OTIMIZADA */
+.keyboard-user .nav-menu a:focus,
+.keyboard-user .dropdown-toggle:focus {
+    outline: 2px solid var(--blue-3);
+    outline-offset: 2px;
+    background: rgba(0, 56, 184, 0.1);
+}
+
+/* REALCE DE FOCO EM ITENS DO MENU DROPDOWN */
+.keyboard-user .dropdown-menu a:focus {
+    background: var(--blue-1);
+    color: var(--blue-3);
+    border-left-color: var(--blue-3);
+    transform: translateX(4px);
+}
+
+/* SINCRONIZAÇÃO VISUAL COM ATRIBUTOS ARIA — ESTADO EXPANDIDO */
+.dropdown-toggle[aria-expanded="true"] {
+    background: rgba(0, 56, 184, 0.1);
+    color: var(--blue-3);
+}
+
+/* INDICADOR DE ESTADO ATIVO — ANIMAÇÃO DA BORDA INFERIOR */
+.dropdown-toggle[aria-expanded="true"]::before {
+    width: 80%;
+}
+
+/* CLASSE UTILITÁRIA PARA ELEMENTOS OCULTOS VISUALMENTE */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* MODAL: REPORTE INCIDENTES */
+/* CONTÊINER PRINCIPAL DO MODAL — POSICIONAMENTO FIXO */
+.modal {
+  position: fixed;
+  bottom: 70px;
+  left: 20px;
+  z-index: 1000;
+  width: auto;
+}
+
+/* BOTÃO DE ACIONAMENTO DO MODAL — DESTAQUE VISUAL PARA URGÊNCIA */
+.modal-btn {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  padding: 12px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+  display: inline-block;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  font-size: 14px;
+  min-width: 200px;
+  text-align: center;
+  border: none;
+  font-family: inherit;
+}
+
+/* ESTADOS DE INTERAÇÃO — HOVER E FOCO */
+.modal-btn:hover,
+.modal-btn:focus {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* OVERLAY DO MODAL — FUNDO ESCURO SEMI-TRANSPARENTE */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+/* ESTADO ATIVO — EXIBIÇÃO DO OVERLAY */
+.modal-overlay.active {
+  display: flex;
+}
+
+/* CONTEÚDO PRINCIPAL DO MODAL — CARTÃO CENTRALIZADO */
+.modal-content {
+    background: var(--current-background-alt);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    border: 3px solid var(--current-primary);
+    position: relative;
+}
+
+/* TÍTULO DO MODAL COM COR PRIMÁRIA DO TEMA */
+.modal-content h3 {
+    color: var(--current-primary);
+    margin-bottom: 15px;
+}
+
+/* SEÇÃO DE CONTATOS COM FUNDO ALTERNATIVO */
+.modal-contacts {
+    background: var(--current-background);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+/* ITEM DE CONTATO — LAYOUT EM LINHA PARA PARES CHAVE-VALOR */
+.contact-item {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* NOTA INFORMATIVA — TEXTO SECUNDÁRIO COM ÊNFASE */
+.modal-note {
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+}
+
+/* BOTÃO DE FECHAMENTO — AÇÃO SECUNDÁRIA */
+.modal-close {
+  background: var(--blue-3);
+  color: white;
+  padding: 10px 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ESTADOS DE INTERAÇÃO DO BOTÃO FECHAR */
+.modal-close:hover,
+.modal-close:focus {
+  background: var(--blue-2);
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* MODAL: ESTILOS ESPECÍFICOS PARA NAVEGAÇÃO POR TECLADO */
+/* REALCE DE FOCO PARA USUÁRIOS DE TECLADO */
+.keyboard-user .modal-btn:focus,
+.keyboard-user .modal-close:focus {
+  outline: 2px solid var(--blue-3);
+  outline-offset: 2px;
+}
+
+/* COMPONENTE SKIP LINK — ACESSIBILIDADE WCAG */
+/* ESTADO PADRÃO — OCULTO VISUALMENTE, MAS ACESSÍVEL */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    padding: 0;
+    margin: -1px;
+}
+
+/* ESTADO COM FOCO — VISÍVEL PARA NAVEGAÇÃO POR TECLADO */
+.skip-link:focus {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    background: #000;
+    color: white;
+    padding: 12px;
+    z-index: 10000;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    outline: 3px solid var(--blue-3);
+    outline-offset: 2px;
+}
+
+
+/* CONTÊINER DOS BOTÕES DE SELEÇÃO DE TEMA */
+.theme-selector {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 6px;
+    background: var(--current-background-alt);
+    border-radius: 16px;
+    border: 1px solid var(--current-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+}
+
+/* BOTÃO INDIVIDUAL DE TEMA COM ESTADOS INTERATIVOS */
+.modern-btn {
+    position: relative;
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* CONTROLE DE CORES DOS ÍCONES POR TEMA */
+.modern-btn .theme-icon {
+    filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+    transition: all 0.3s ease;
+}
+
+/* CONFIGURAÇÃO DE CORES PARA MODO CLARO */
+[data-theme="light"] .modern-btn .theme-icon {
+    --icon-invert: 0;
+}
+
+/* CONFIGURAÇÃO DE CORES PARA MODO ESCURO */
+[data-theme="dark"] .modern-btn .theme-icon {
+    --icon-invert: 1;
+}
+
+/* CONFIGURAÇÃO DE CORES PARA ALTO CONTRASTE */
+[data-theme="highcontrast"] .modern-btn .theme-icon {
+    --icon-invert: 1;
+}
+
+/* EFEITO HOVER COM ELEVAÇÃO E REALCE DE COR */
+.modern-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    background: var(--current-primary);
+    border-color: var(--current-primary);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ANIMAÇÃO DO ÍCONE NO ESTADO HOVER */
+.modern-btn:hover .theme-icon {
+    transform: scale(1.1);
+}
+
+/* CORES DO ÍCONE NO HOVER PARA MODO CLARO E ESCURO */
+[data-theme="light"] .modern-btn:hover .theme-icon,
+[data-theme="dark"] .modern-btn:hover .theme-icon {
+    filter: brightness(0) saturate(100%) invert(1);
+}
+
+/* CORES DO ÍCONE NO HOVER PARA ALTO CONTRASTE */
+[data-theme="highcontrast"] .modern-btn:hover .theme-icon {
+    filter: brightness(0) saturate(100%) invert(0);
+}
+
+/* ESTADO ATIVO DO BOTÃO COM PULSO ANIMADO */
+.modern-btn[aria-pressed="true"] {
+    background: var(--current-primary);
+    border-color: var(--current-primary);
+    box-shadow: 0 4px 15px var(--current-primary);
+    animation: gentle-pulse 2s infinite;
+}
+
+/* ANIMAÇÃO DO ÍCONE NO ESTADO ATIVO */
+.modern-btn[aria-pressed="true"] .theme-icon {
+    transform: scale(1.1);
+}
+
+/* CORES DO ÍCONE NO ESTADO ATIVO PARA MODO CLARO E ESCURO */
+[data-theme="light"] .modern-btn[aria-pressed="true"] .theme-icon,
+[data-theme="dark"] .modern-btn[aria-pressed="true"] .theme-icon {
+    filter: brightness(0) saturate(100%) invert(1);
+}
+
+/* CORES DO ÍCONE NO ESTADO ATIVO PARA ALTO CONTRASTE */
+[data-theme="highcontrast"] .modern-btn[aria-pressed="true"] .theme-icon {
+    filter: brightness(0) saturate(100%) invert(0);
+}
+
+/* CONTÊINER DO CONTEÚDO DO BOTÃO */
+.btn-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* CONTÊINER DO ÍCONE COM DIMENSÕES FIXAS */
+.btn-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+/* ESTILO BASE PARA ÍCONES DE TEMA */
+.theme-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+/* ANIMAÇÃO REFORÇADA NO ESTADO ATIVO COM HOVER */
+.modern-btn[aria-pressed="true"]:hover .theme-icon {
+    transform: scale(1.15);
+}
+
+/* EFEITO RIPPLE PARA FEEDBACK TÁTIL */
+.btn-ripple {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ATIVAÇÃO DO EFEITO RIPPLE NO CLIQUE */
+.modern-btn:active .btn-ripple {
+    animation: ripple 0.6s ease-out;
+}
+
+/* ANIMAÇÃO DE EXPANSÃO RADIAL DO RIPPLE */
+@keyframes ripple {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.8;
+    }
+    100% {
+        width: 80px;
+        height: 80px;
+        opacity: 0;
+    }
+}
+
+/* ANIMAÇÃO DE PULSO SUAVE PARA ESTADO ATIVO */
+@keyframes gentle-pulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px var(--current-primary);
+    }
+    50% {
+        box-shadow: 0 4px 20px var(--current-primary), 0 0 30px rgba(0, 56, 184, 0.3);
+    }
+}
+
+/* TOOLTIP PARA IDENTIFICAÇÃO DOS TEMAS */
+.modern-btn {
+    position: relative;
+}
+
+/* TOOLTIP OCULTO COM DESCRIÇÃO DO TEMA */
+.modern-btn::after {
+    content: attr(data-theme);
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--current-text);
+    color: var(--current-background);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+/* EXIBIÇÃO DO TOOLTIP NO HOVER */
+.modern-btn:hover::after {
+    opacity: 1;
+}
+
+/* ANIMAÇÃO DE ENTRADA PARA O SELEtor DE TEMAS */
+.theme-selector {
+    animation: slideInRight 0.5s ease-out;
+}
+
+/* ANIMAÇÃO DE DESLOCAMENTO LATERAL COM OPACIDADE */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 
 /*
 ————————————————————————————————————————————————————————————————————————————————————————
@@ -2015,6 +3163,24 @@ fieldset div input#complemento:not(:placeholder-shown) {
         align-items: center;
     }
 
+    .dropdown.active .dropdown-menu {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        max-height: 500px;
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .dropdown-menu {
+        display: none;
+    }
+    
+    .dropdown.active .dropdown-menu {
+        display: block;
+    }
+    
     .menu-button {
         display: flex;
     }
@@ -2268,6 +3434,22 @@ fieldset div input#complemento:not(:placeholder-shown) {
         font-size: 11px;
     }
 
+    .theme-selector {
+        gap: 6px;
+        padding: 4px;
+    }
+    
+    .modern-btn {
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+    }
+    
+    .btn-icon {
+        width: 22px;
+        height: 22px;
+    }
+
 }
 
 
@@ -2402,7 +3584,6 @@ fieldset div input#complemento:not(:placeholder-shown) {
         padding: 22px 50px 22px 0px;
     }
     
-
     .alert-educational:hover {
         width: 420px;
         padding: 25px 100px 25px 35px;
@@ -2425,7 +3606,6 @@ fieldset div input#complemento:not(:placeholder-shown) {
         font-size: 1.05rem;
     }
 }
-
 
 /* OTIMIZAÇÃO: DESKTOP */
 @media (max-width: 1200px) {
