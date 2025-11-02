@@ -1,11 +1,10 @@
 /*
-    Plataforma Web – ONG
-    
-    Desenvolvido por: Jayme Sanches Filho
-    Instituição: Universidade Cruzeiro do Sul
-    Disciplina: Desenvolvimento Front-End para Web
-    Experiência prática — Entrega 2 (Estilização e Leiautes)
-    Data: 30/10/2025
+PLATAFORMA WEB – ONG
+DESENVOLVIDO POR: JAYME SANCHES FILHO
+INSTITUIÇÃO: UNIVERSIDADE CRUZEIRO DO SUL
+DISCIPLINA: DESENVOLVIMENTO FRONT—END PARA WEB
+EXPERIÊNCIA PRÁTICA — ENTREGA 3 (INTERATIVIDADE E FUNCIONALIDADES)
+DATA: 31/10/2025
 */
 
 /*
@@ -321,6 +320,7 @@ select {
     width: 100%;
     box-sizing: border-box;
     transition: all 0.3s ease;
+    color: var(--text-dark);
 }
 
 select {
@@ -1229,124 +1229,6 @@ nav {
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ALERT: ENVIO DO FORMULÁRIO */
-.alert-form {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--pastel);
-    color: var(--blue-3);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    animation: alertFormFadeIn 0.5s ease-out;
-}
-
-.alert-form-content h3 {
-    margin: 0 0 1rem 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-.alert-form-content p {
-    margin: 0;
-    font-size: 1.0rem;
-    line-height: 1.4;
-}
-
-.alert-form-close {
-    display: inline-block;
-    margin-top: 1.5rem;
-    padding: 0.5rem 1.5rem;
-    background: var(--blue-3);
-    border: solid var(--blue-2);
-    border-radius: 25px;
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.alert-form-close:hover {
-    background: var(--blue-2);
-    border-color: var(--blue-1);
-    transform: translateY(-2px);
-}
-
-.alert-form-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 999;
-    animation: overlayFadeIn 0.3s ease-out;
-}
-
-.alert-form-checkbox {
-    display: none;
-}
-
-.alert-form-checkbox:checked ~ .alert-form-overlay,
-.alert-form-checkbox:checked ~ .alert-form {
-    display: block;
-}
-
-@keyframes alertFormFadeIn {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
-}
-
-@keyframes overlayFadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.alert-form-success {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.submit-btn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    background:var(--blue-3);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-
-.submit-btn:hover {
-    background: var(--blue-2);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-
 /* ALERT: NOTA EDUCATIVA COM HOVER */
 .alert-educational {
     position: fixed;
@@ -1604,6 +1486,224 @@ fieldset div input#complemento:not(:placeholder-shown) {
     border-right: 3px solid var(--blue-3);
 }
 
+/* FORM: ENVIO REAL DE DADOS */
+.form-message.success {
+    background: linear-gradient(135deg, var(--blue-1), var(--pastel));
+    border: 3px solid var(--blue-3);
+    color: var(--blue-4);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    box-shadow: 0 8px 30px rgba(0, 56, 184, 0.15);
+    animation: fadeInUp 0.6s ease;
+}
+
+.form-message.success h3 {
+    color: var(--blue-3);
+    font-size: var(--text-title-2);
+    margin-bottom: var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+}
+
+.form-message.success h3::before {
+    content: '✓';
+    font-size: 2rem;
+    color: #27ae60;
+}
+
+/* LOADING SPINNER */
+.loading-spinner {
+    text-align: center;
+    padding: var(--space-xl);
+    background: var(--pastel);
+    border-radius: var(--radius-lg);
+    margin: var(--space-lg) 0;
+    border: 2px dashed var(--blue-2);
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--blue-1);
+    border-top: 5px solid var(--blue-3);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto var(--space-md);
+}
+
+.loading-spinner p {
+    color: var(--blue-3);
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+}
+
+/* BOTÃO DE ENVIO COM ESTADOS */
+.submit-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--blue-3);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    width: 100%;
+    font-size: var(--text-lg);
+    min-height: 60px;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: var(--blue-2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn:disabled {
+    background: var(--gray-1);
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+    box-shadow: none;
+}
+
+.submit-btn.button-loading {
+    position: relative;
+    color: transparent;
+}
+
+.submit-btn.button-loading::after {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    left: 50%;
+    margin: -12px 0 0 -12px;
+    border: 3px solid transparent;
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ANIMAÇÕES */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ESTADOS DO FORMULÁRIO DURANTE O ENVIO */
+.form-submitting {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.form-submitting input,
+.form-submitting select,
+.form-submitting textarea {
+    background-color: var(--blue-1);
+}
+
+
+/* ESTILOS DE VALIDAÇÃO DO FORMULÁRIO */
+.field-valid {
+    border-color: #27ae60 !important;
+    background-color: rgba(39, 174, 96, 0.05) !important;
+    box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.1) !important;
+}
+
+.field-invalid {
+    border-color: #e74c3c !important;
+    background-color: rgba(231, 76, 60, 0.05) !important;
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.1) !important;
+    animation: gentle-shake 0.5s ease-in-out;
+}
+
+.field-message {
+    display: none;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background: rgba(231, 76, 60, 0.1);
+    border-left: 3px solid var(--alizarin);
+    color: var(--alizarin);
+}
+
+.button-loading {
+    opacity: 0.7;
+    cursor: not-allowed !important;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 20px;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes gentle-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* ANIMAÇÕES PARA O ALERTA DE SUCESSO */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes slideDown {
+    from { 
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
 
 
 /*
@@ -1897,31 +1997,6 @@ fieldset div input#complemento:not(:placeholder-shown) {
         font-size: 10px;
     }
 
-    .alert-form {
-        padding: 1.5rem;
-        max-width: 350px;
-        width: 85%;
-    }
-
-    .alert-form-content h3 {
-        font-size: var(--text-lg);
-        margin: 0 0 0.8rem 0;
-    }
-
-    .alert-form-content p {
-        font-size: var(--text-sm);
-    }
-
-    .alert-form-success {
-        font-size: 2.5rem;
-        margin-bottom: 0.8rem;
-    }
-
-    .alert-form-close {
-        margin-top: 1.2rem;
-        padding: 0.5rem 1.2rem;
-        font-size: var(--text-sm);
-    }
 }
 
 
@@ -2193,31 +2268,6 @@ fieldset div input#complemento:not(:placeholder-shown) {
         font-size: 11px;
     }
 
-    .alert-form {
-        padding: 1.8rem;
-        max-width: 380px;
-        width: 90%;
-    }
-
-    .alert-form-content h3 {
-        font-size: 1.4rem;
-        margin: 0 0 1rem 0;
-    }
-
-    .alert-form-content p {
-        font-size: 1rem;
-    }
-
-    .alert-form-success {
-        font-size: 2.8rem;
-        margin-bottom: 1rem;
-    }
-
-    .alert-form-close {
-        margin-top: 1.5rem;
-        padding: 0.5rem 1.5rem;
-        font-size: 1rem;
-    }
 }
 
 
@@ -2374,29 +2424,6 @@ fieldset div input#complemento:not(:placeholder-shown) {
     .alert-content p {
         font-size: 1.05rem;
     }
-
-    .alert-form {
-        padding: 2.2rem;
-        max-width: 480px;
-        width: 85%;
-    }
-
-    .alert-form-content h3 {
-        font-size: 1.6rem;
-    }
-
-    .alert-form-content p {
-        font-size: var(--text-md);
-    }
-
-    .alert-form-success {
-        font-size: 3.2rem;
-    }
-
-    .alert-form-close {
-        padding: 0.7rem 2rem;
-        font-size: var(--text-md);
-    }
 }
 
 
@@ -2552,29 +2579,6 @@ fieldset div input#complemento:not(:placeholder-shown) {
 
     .alert-content p {
         font-size: var(--text-md);
-    }
-
-    .alert-form {
-        padding: 2.5rem;
-        max-width: 520px;
-        width: 80%;
-    }
-
-    .alert-form-content h3 {
-        font-size: 1.7rem;
-    }
-
-    .alert-form-content p {
-        font-size: 1.15rem;
-    }
-
-    .alert-form-success {
-        font-size: 3.5rem;
-    }
-
-    .alert-form-close {
-        padding: 0.8rem 2.2rem;
-        font-size: 1.15rem;
     }
 }
 

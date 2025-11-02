@@ -8,6 +8,8 @@
     Data: 30/10/2025
  -->
 
+ <!-- INDEX.HTML — ARQUIVO HTML5 OTIMIZADO PARA NAVEGAÇÃO SPA E GERENCIAMENTO DE TEMPLATES JAVASCRIPT-->
+
 <!DOCTYPE html> 
 
 <!-- ESPECIFICA O IDIOMA E REGIÃO PARA ACESSIBILIDADE E SEO -->
@@ -25,6 +27,16 @@
 
         <!-- DEFINE O ARQUIVO DE ESTILIZAÇÃO (CSS) -->
         <link rel="stylesheet" href="css/styles.css">
+
+        <!-- DEFINE ARQUIVOS DE JAVASCRIPT (JS) -->
+        <!-- IMPLEMENTA NAVEGAÇÃO SPA -->
+        <script src="js/spa-router.js"></script>
+
+        <!-- IMPLEMENTA VALIDAÇÃO JAVASCRIPT DO FORMULÁRIO -->
+        <script src="js/form-validator.js"></script>
+
+        <!-- IMPLEMENTA SISTEMA DE TEMPLATES DINÂMICOS -->
+        <script src="js/templates.js"></script>
 
         <!-- DEFINE O FAVICON -->
         <link rel="icon" type="image/x-icon" href="img/favicon/favicon.ico">
@@ -74,108 +86,26 @@
                 </label>
                 
                 <ul class="nav-menu">
-                    <li><a href="index.html">Início</a></li>
+                    <li><a href="#/">Início</a></li>
                     
                     <!-- ITEM COM SUBMENU DROPDOWN (DESKTOP) -->
                     <li class="dropdown">
-                        <a href="projetos.html" class="dropdown-toggle">Iniciativas</a>
+                        <a href="#/projetos" class="dropdown-toggle">Iniciativas</a>
                         <ul class="dropdown-menu">
-                            <li><a href="projetos.html#spark">KOLENU Spark</a></li>
-                            <li><a href="projetos.html#echo">KOLENU Echo</a></li>
-                            <li><a href="projetos.html#nexus">KOLENU Nexus</a></li>
-                            <li><a href="projetos.html#watch">KOLENU Watch</a></li>
+                            <li><a href="#/projetos#spark">KOLENU Spark</a></li>
+                            <li><a href="#/projetos#echo">KOLENU Echo</a></li>
+                            <li><a href="#/projetos#nexus">KOLENU Nexus</a></li>
+                            <li><a href="#/projetos#watch">KOLENU Watch</a></li>
                         </ul>
                     </li>
                     
-                    <li><a href="cadastro.html">Apoie</a></li>
+                    <li><a href="#/cadastro">Apoie</a></li>
                 </ul>
             </nav>
         </header>
         
-        <main>
-            
-            <!-- HERO SECTION — PRIMEIRA IMPRESSÃO VISUAL -->
-            <section class="hero">
-                <h1>Projeto KOLENU</h1>
-                <img src="img/global-hero.webp" alt="Logo do Projeto KOLENU em azul. A palavra KOLENU aparece em fonte de peso maior, 
-                com a letra K maior que as demais, e um Magen David dentro da letra O. Duas faixas azuis passam por cima e por baixo da 
-                palavra, reminescentes da bandeira de Israel.">
-            </section>
-
-            <section class="sobre-nos">
-                <h2>QUEM SOMOS</h2>
-                <p>O <strong>Projeto Kolenu</strong> nasceu da urgência em combater a crescente onda de antissemitismo no Brasil e no mundo.</p>
-                <p>Nossa organização acredita que o silêncio é o maior aliado do preconceito.</p>
-                <p>Por isso, decidimos levantar nossa voz contra a desinformação e a intolerância, 
-                    buscando atuar como uma ponte entre a comunidade judaica e a sociedade brasileira, 
-                    desconstruindo estereótipos e fomentando o entendimento mútuo.</p>
-            </section>
-            
-            <section class="missao">
-                <h2>NOSSA MISSÃO</h2>
-                <p>O <strong>Projeto Kolenu</strong> visa levar a conscientização acerca do antissemitismo através de programas educativos, 
-                    produção de conteúdo digital e construção de diálogo entre diferentes religiões e setores da sociedade brasileira.</p>
-                <p>Encaramos o antissemitismo como um desafio multifacetado que tende a ressurgir sob novas roupagens, 
-                    apoiando-se tanto em velhas mentiras quanto em novas falsidades. 
-                    Por isso, atuamos em diferentes frentes, abrangendo educação formal, engajamento digital, 
-                    articulação comunitária e mapeamento de incidentes antissemitas em nosso país, dentro e fora da <em>web</em>.</p>
-                <p>Trabalhamos para desconstruir teorias conspiratórias, desinformação e estereótipos negativos, 
-                    buscando promover uma sociedade baseada no respeito às diferenças e na defesa intransigente dos direitos humanos. </p>
-            </section>
-            
-            <section class="valores">
-                <h2>NOSSOS VALORES</h2>
-                <ul class="lista-valores">
-                    <li>
-                        <h3>Educação como Transformação</h3>
-                        <p>Vemos na educação o principal instrumento para a desconstrução de preconceitos, 
-                            e acreditamos no poder do conhecimento para abrir caminhos e derrubar as barreiras da desinformação.</p>
-                    </li>
-                    <li>
-                        <h3>Diálogo como Ponte</h3>
-                        <p>Buscamos criar espaços de conversa e escuta onde dúvidas possam ser sanadas, 
-                            histórias possam ser compartilhadas, e a humanidade comum seja redescoberta.</p>
-                    </li>
-                     <li>
-                        <h3>História como Inspiração</h3>
-                        <p>Honramos a trajetória de resistência do povo judeu, 
-                            e visamos converter a memória das perseguições e injustiças em impulso para construir um futuro diferente. </p>
-                    </li>
-                </ul>
-            </section>
-
-            <section class="porque-kolenu">
-                <h2>POR QUE "KOLENU"?</h2>
-                <p>"Kolenu" significa "nossa voz" em hebraico, o idioma milenar do povo judeu.</p>
-                <p>Esse projeto nasceu para reunir diversas vozes em torno de uma mesma causa: 
-                    o combate à desinformação que alimenta a intolerância e o preconceito.</p>
-                <p>É hora de fazer nossa voz ser ouvida. 
-                    Porque o antissemitismo avança a cada minuto de silêncio.</p>
-            </section>
-
-            <!-- CTA — CONVERSÃO DE VOLUNTÁRIOS E DOADORES -->
-            <section class="cta">
-                <h2>JUNTE SUA VOZ À NOSSA</h2>
-                <ul class="cta-list">
-                    <a href="projetos.html">
-                        <li>
-                            <p>Seja um divulgador do Kolenu em suas redes!</p>
-                        </li>
-                    </a>
-                    <a href="projetos.html">
-                        <li>
-                            <p>Convide-nos para uma palestra em sua escola ou universidade!</p>
-                        </li>
-                    </a>
-                    <a href="cadastro.html">
-                        <li>
-                            <p>Faça uma doação ou se cadastre como voluntário!</p>
-                        </li>
-                    </a>
-                </ul>
-            </section>   
-
-        </main>
+        <!-- CONTAINER PRINCIPAL DA APLICAÇÃO SPA. CONTEÚDO DINÂMICO SERÁ INJETADO VIA TEMPLATES.JS -->
+        <main id="app"></main>
 
         <!-- FOOTER COM GRID DE 12 COLUNAS CUSTOMIZADO -->
         <!-- CONTATO, REDES SOCIAIS, E DOCUMENTAÇÃO LEGAL (SIMBÓLICA)-->
