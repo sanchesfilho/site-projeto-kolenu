@@ -13,22 +13,22 @@ Plataforma web completa que permite gerenciamento de atividades, divulgação de
 ## ESTRUTURA
 ```
 site-projeto-kolenu/  
-├── index.html                  # Página inicial (base para SPA e templates JavaScript)  
-├── assets                      # Assets variados  
-│   └── fonts                   # Fontes customizadas  
-├── img/                        # Assets visuais   
-│   └── favicon/                # Assets de favicon  
-├── css/                        # Arquivos CSS3  
-│   └── styles.css              # Arquivo de estilos  
-├── js/                         # Arquivos JavaScript ES6+  
-│   └── templates.js            # Gerenciador de templates dinâmicos JavaScript  
-│   └── spa-router.js           # Roteador client-side SPA com hash  
-│   └── form-validator.js       # Validador de formulário em tempo real  
-│   └── aria-manager.js         # Gerenciamento de estados ARIA e live regions para screen readers
-│   └── theme-switcher.js       # Sistema de temas dinâmicos com persistência de preferências
-│   └── mobile-menu.js          # Menu otimizado para dispositivos mobile  
-│   └── keyboard-navigator.js   # Suporte completo a navegação por teclado  
-└── README.md                   # Documentação  
+├── index.html                        # Página inicial (base para SPA e templates JavaScript)  
+├── assets                            # Assets variados  
+│   └── fonts                         # Fontes customizadas  
+├── img/                              # Assets visuais   
+│   └── favicon/                      # Assets de favicon  
+├── css/                              # Arquivos CSS3  
+│   └── styles.min.css                # Arquivo de estilos  
+├── js/                               # Arquivos JavaScript ES6+  
+│   └── templates.min.js              # Gerenciador de templates dinâmicos JavaScript  
+│   └── spa-router.min.js             # Roteador client-side SPA com hash  
+│   └── form-validator.min.js         # Validador de formulário em tempo real  
+│   └── aria-manager.min.js           # Gerenciamento de estados ARIA e live regions para screen readers
+│   └── theme-switcher.min.js         # Sistema de temas dinâmicos com persistência de preferências
+│   └── mobile-menu.min.js            # Menu otimizado para dispositivos mobile  
+│   └── keyboard-navigator.min.js     # Suporte completo a navegação por teclado  
+└── README.md                         # Documentação  
 ...
 ```
 ## ENTREGAS REALIZADAS
