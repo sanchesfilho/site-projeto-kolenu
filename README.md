@@ -62,10 +62,11 @@ site-projeto-kolenu/
 **Entrega IV:** *Versionamento, Acessibilidade e Deploy* (Git, Acessibilidade, Performance) **(03/10/2025)**  
 *- Implementação de estratégia GitFlow com versionamento semântico e histórico de commits organizado*  
 *- Sistema de acessibilidade completo seguindo WCAG 2.1 Nível AA com navegação por teclado e suporte a leitores de tela*  
-*- Otimização avançada para produção com minificação de assets e compressão inteligente de imagens*  
-*- Implementação de temas acessíveis (modos escuro e alto contraste)*
+*- Minificação completa de assets*  
+*- Imagens otimizadas* ***(<85 KB por arquivo, sem exceções)***  
+*- Implementação de temas acessíveis (modos escuro e alto contraste)*  
 *- Implementação de contraste mínimo de 4.5:1*  
-*- README.md detalhado*
+*- README.md detalhado*  
 
 ## TECNOLOGIAS
 *- Frontend: HTML5, CSS3, JavaScript ES6+*  
