@@ -1569,25 +1569,19 @@ input[type="range"]::-webkit-slider-thumb {
   display: flex;
 }
 
-/*TOAST: BOAS-VINDAS */
-.toast-auto {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
-}
-
 /* MENSAGEM TOAST COM ANIMAÇÃO DE ENTRADA E SAÍDA */
 .toast-message {
   background: var(--blue-3);
   color: white;
-  padding: 15px 20px;
+  padding: 10px 15px;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   opacity: 0;
   transform: translateX(100px);
-  animation: toastIn 0.5s ease 1s forwards, 
-             toastOut 0.5s ease 5s forwards;
+  animation: toastIn 0.5s ease 0.5s forwards, 
+             toastOut 0.5s ease 2s forwards;
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 /* ANIMAÇÃO DE ENTRADA DO TOAST */
@@ -2855,13 +2849,19 @@ fieldset div input#complemento:not(:placeholder-shown) {
 }
 
 /*
-————————————————————————————————————————————————————————————————————————————————————————
-                         MEDIA QUERIES: BREAKPOINTS RESPONSIVOS
-————————————————————————————————————————————————————————————————————————————————————————
+=================================================================================================================
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+                                    MEDIA QUERIES: BREAKPOINTS RESPONSIVOS
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+=================================================================================================================
 */
 
-/* OTIMIZAÇÃO: SMARTPHONE PEQUENO */
+/*
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+*/
+/* 1. OTIMIZAÇÃO PARA SMARTPHONE  */
 @media (max-width: 480px) {
+    /* ÁREAS DE CLIQUE AMPLAS PARA TOUCH */
     .nav-menu > li > a,
     .dropdown-toggle {
         min-height: 44px;
@@ -2869,22 +2869,25 @@ fieldset div input#complemento:not(:placeholder-shown) {
         align-items: center;
     }
 
+    /* LINKS DROPDOWN COM ALTURA MÍNIMA PARA TOCAR */
     .dropdown-menu a {
         min-height: 44px;
         display: flex;
         align-items: center;
     }
 
+    /* EXIBIÇÃO DO BOTÃO MENU HAMBÚRGUER */
     .menu-button {
         display: flex;
     }
 
+    /* MENU LATERAL FIXO COM ANIMAÇÃO SLIDE */
     .nav-menu {
         position: fixed;
-        top: var(--nav-height);
+        top: calc(var(--nav-height) + 20px) !important;
         left: 0;
-        width: 100%;
-        height: calc(100vh - var(--nav-height));
+        width: 45% !important;
+        height: calc(100vh - var(--nav-height) - 20px) !important;
         background: var(--pastel);
         flex-direction: column;
         justify-content: flex-start;
@@ -2897,33 +2900,44 @@ fieldset div input#complemento:not(:placeholder-shown) {
         overflow-y: auto;
     }
 
+    /* ESPAÇAMENTO SUPERIOR DO PRIMEIRO ITEM */
+    .nav-menu > li:first-child {
+        margin-top: 10px;
+    }
+
+    /* ATIVAÇÃO DO MENU VIA CHECKBOX */
     .menu-toggle:checked ~ .nav-menu {
         transform: translateX(0);
     }
 
-    /* ANIMAÇÃO: BOTÃO HAMBÚRGUER -> X */
+    /* ANIMAÇÃO: HAMBÚRGUER -> X (LINHA 1) */
     .menu-toggle:checked ~ .menu-button span:nth-child(1) {
         transform: rotate(45deg) translate(6px, 6px);
     }
 
+    /* ANIMAÇÃO: HAMBÚRGUER -> X (LINHA 2 - SOME) */
     .menu-toggle:checked ~ .menu-button span:nth-child(2) {
         opacity: 0;
     }
 
+    /* ANIMAÇÃO: HAMBÚRGUER -> X (LINHA 3) */
     .menu-toggle:checked ~ .menu-button span:nth-child(3) {
         transform: rotate(-45deg) translate(6px, -6px);
     }
 
+    /* ITENS DO MENU COM LARGURA TOTAL E BORDAS */
     .nav-menu > li {
         width: 100%;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         margin: 0;
     }
 
+    /* REMOÇÃO DA BORDA DO ÚLTIMO ITEM */
     .nav-menu > li:last-child {
         border-bottom: none;
     }
 
+    /* LINKS DO MENU COM PADDING AMPLO */
     .nav-menu > li > a {
         padding: var(--space-lg) var(--space-md);
         font-size: var(--text-md);
@@ -2931,49 +2945,59 @@ fieldset div input#complemento:not(:placeholder-shown) {
         border-radius: 0;
     }
 
+    /* REMOÇÃO DO PSEUDO-ELEMENTO DECORATIVO */
     .nav-menu > li > a::before {
         display: none;
     }
 
+    /* EXPANSÃO DO DROPDOWN ATIVO */
     .dropdown.active .dropdown-menu {
         max-height: 500px;
     }
 
+    /* BOTÃO DROPDOWN COM SETA INDICADORA */
     .dropdown-toggle {
         justify-content: space-between;
         width: 100%;
     }
 
+    /* SETA DO DROPDOWN (TRIÂNGULO) */
     .dropdown-toggle::after {
         content: '▶';
         transition: transform 0.3s ease;
     }
 
+    /* ROTAÇÃO DA SETA QUANDO ATIVO */
     .dropdown.active .dropdown-toggle::after {
         transform: rotate(90deg);
     }
 
+    /* ITENS DO SUBMENU COM PADDING E BORDAS */
     .dropdown-menu a {
         padding: var(--space-md) var(--space-xl);
         border-left: none;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
+    /* HOVER SUAVE NOS ITENS DO SUBMENU */
     .dropdown-menu a:hover {
         transform: none;
         background: rgba(0, 56, 184, 0.1);
     }
 
+    /* REMOÇÃO DA BORDA DO ÚLTIMO ITEM */
     .dropdown-menu li:last-child a {
         border-bottom: none;
     }
 
-     .cta-list {
+    /* LISTA DE CTA EM COLUNA ÚNICA */
+    .cta-list {
         flex-direction: column;
         gap: var(--space-sm);
         padding: 0 var(--space-sm);
     }
     
+    /* ITENS CTA COM LARGURA TOTAL */
     .cta-list li {
         min-width: 100%; 
         width: 100%;
@@ -2981,72 +3005,130 @@ fieldset div input#complemento:not(:placeholder-shown) {
         padding: var(--space-md);
     }
     
+    /* IMAGEM DO HEROI COM LARGURA RESPONSIVA */
     .hero img {
         width: 90%;
         max-width: 100%;
     }
     
+    /* SEÇÃO HERO COM PADDING REDUZIDO */
     .hero {
         padding: var(--space-lg) var(--space-sm);
     }
     
+    /* CONTEÚDO PRINCIPAL SEM OVERFLOW HORIZONTAL */
     main {
         width: 100%;
         overflow-x: hidden;
     }
 
+    /* FOOTER EM LAYOUT DE UMA COLUNA */
     footer {
         grid-template-columns: 1fr;
-        gap: var(--space-lg);
+        gap: var(--space-md);
         padding: var(--space-lg) var(--space-sm);
         text-align: center;
-            transform: translateX(-10px);
+        transform: none;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0 auto;
+        justify-items: center;
     }
-    
+
+    /* SEÇÕES DO FOOTER CENTRALIZADAS */
     footer section {
         align-items: center;
         gap: var(--space-sm);
+        width: 100%;
+        max-width: 300px;
+        padding: 0;
     }
-    
+
+    /* COPYRIGHT COM BORDA SUPERIOR */
     .footer-copyright {
         grid-column: 1;
         width: 100%;
+        max-width: 300px;
         margin-top: var(--space-md);
         padding-top: var(--space-md);
-        font-size: 0.8rem;
+        font-size: 0.7rem;
+        border-top: 1px solid var(--current-border);
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
     }
-    
+
+    /* TEXTOS DE CONTATO CENTRALIZADOS */
     .footer-contact p,
     .footer-sns p,
     .footer-legal p {
         justify-content: center;
         padding-left: 0;
-        font-size: 0.6rem;
+        font-size: 0.75rem;
+        margin: 0;
+        line-height: 1.4;
+        text-align: center;
     }
-    
+
+    /* TÍTULOS DO FOOTER COM TAMANHO REDUZIDO */
     footer h3 {
-        font-size: var(--text-xs);
+        font-size: 0.85rem;
         margin-bottom: var(--space-sm);
+        text-align: center;
+        width: 100%;
     }
-    
+
+    /* LINKS DO FOOTER CENTRALIZADOS */
     footer a {
+        justify-content: center;
+        font-size: 0.75rem;
+        padding: 4px 0;
+        text-align: center;
+    }
+
+    /* FOOTER PRINCIPAL CENTRALIZADO */
+    body > footer {
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: var(--space-sm);
+        padding-right: var(--space-sm);
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* COLUNAS DO FOOTER COM LARGURA FIXA */
+    footer .col-4 {
+        grid-column: 1;
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: var(--space-lg);
+        display: flex;
         justify-content: center;
     }
 
-    body > footer {
-        margin-left: 0;
-        margin-right: 0;
-        padding-left: var(--space-xs);
-        padding-right: var(--space-sm);
+    /* SEÇÕES DO FOOTER COM ESPAÇAMENTO */
+    .footer-contact,
+    .footer-sns,
+    .footer-legal {
+        margin-bottom: var(--space-lg);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-        body h2 {
+    /* TÍTULOS H2 COM TAMANHO REDUZIDO */
+    body h2 {
         font-size: 1.6rem;
         line-height: 1.2;
         padding: var(--space-sm);
         margin-bottom: var(--space-sm);
     }
 
+    /* TÍTULOS DE VALORES OTIMIZADOS */
     .valores h3 {
         font-size: var(--text-md);
         line-height: 1.2;
@@ -3054,6 +3136,7 @@ fieldset div input#complemento:not(:placeholder-shown) {
         text-align: center;
     }
 
+    /* FORMULÁRIOS COM PADDING OTIMIZADO */
     form {
         padding: var(--space-sm);
         margin: -21px;
@@ -3062,745 +3145,557 @@ fieldset div input#complemento:not(:placeholder-shown) {
         font-size: var(--text-sm);
     }
     
+    /* GRUPOS DE FORMULÁRIO COM ESPAÇAMENTO */
     .form-group {
         margin-bottom: var(--space-lg);
     }
     
+    /* CAMPOS DE FORMULÁRIO COM FONT-SIZE FIXO */
     input, textarea, select {
         font-size: 1rem;
         padding: var(--space-sm);
     }
     
+    /* BOTÃO SUBMIT COM LARGURA TOTAL */
     button[type="submit"] {
         width: 100%;
         padding: var(--space-md);
         font-size: 1.0rem;
     }
 
+    /* TOAST NOTIFICATION EM LARGURA TOTAL */
     .toast-auto {
-        top: 10px;
-        right: 10px;
-        left: 10px;
-        width: calc(100% - 20px);
+        top: 5px;
+        right: 5px;
+        left: 5px;
+        max-width: none;
+        width: calc(100% - 10px);
     }
     
+    /* MENSAGEM TOAST COM ANIMAÇÃO MOBILE */
     .toast-message {
-        padding: var(--space-md);
-        font-size: var(--text-sm);
-        text-align: center;
-        border-radius: var(--radius-md);
+        padding: 8px 12px;
+        font-size: 0.7rem;
         transform: translateY(-20px);
-        animation: toastInMobile 0.5s ease 1s forwards, 
-                  toastOutMobile 0.5s ease 5s forwards;
+        animation: toastInMobile 0.5s ease 0.5s forwards, 
+                toastOutMobile 0.5s ease 2s forwards;
     }
     
+    /* ANIMAÇÃO DE ENTRADA DO TOAST (MOBILE) */
     @keyframes toastInMobile {
         to {
-            opacity: 1;
-            transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0);
         }
     }
     
+    /* ANIMAÇÃO DE SAÍDA DO TOAST (MOBILE) */
     @keyframes toastOutMobile {
         to {
-            opacity: 0;
-            transform: translateY(-20px);
+        opacity: 0;
+        transform: translateY(-20px);
         }
     }
 
+    /* MODAL COM LARGURA RESPONSIVA */
     .modal-content {
-    width: 95vw;
-    margin: 5vh auto;
-    padding: 15px;
-    font-size: 14px;
-    }
-
-    .alert-educational {
-        width: 45px;
-        hover: none;
-    }
-
-    .alert-educational:active {
-        width: 280px;
-        background: var(--pastel);
-        border-color: var(--blue-3);
-    }
-
-    .alert-educational:active .alert-preview span {
-        writing-mode: horizontal-tb;
-        transform: rotate(0deg);
-    }
-
-    .alert-educational:active .alert-content {
-        opacity: 1;
-        max-height: 500px;
-    }
-
-    .alert-educational {
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-    }
-
-    .alert-preview span {
-        font-size: 10px;
-    }
-
-}
-
-
-/* OTIMIZAÇÃO: SMARTPHONE */
-@media (max-width: 768px) {
-    .nav-menu > li > a,
-    .dropdown-toggle {
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-    }
-
-    .dropdown-menu a {
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-    }
-
-    .dropdown.active .dropdown-menu {
-        position: static;
-        transform: none;
-        box-shadow: none;
-        border: none;
-        max-height: 500px;
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    .dropdown-menu {
-        display: none;
-    }
-    
-    .dropdown.active .dropdown-menu {
-        display: block;
-    }
-    
-    .menu-button {
-        display: flex;
-    }
-
-    .nav-menu {
-        position: fixed;
-        top: var(--nav-height);
-        left: 0;
-        width: 100%;
-        height: calc(100vh - var(--nav-height));
-        background: var(--pastel);
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: stretch;
-        padding: 0;
-        gap: 0;
-        transform: translateX(-100%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 999;
-        overflow-y: auto;
-    }
-
-    .menu-toggle:checked ~ .nav-menu {
-        transform: translateX(0);
-    }
-
-    .menu-toggle:checked ~ .menu-button span:nth-child(1) {
-        transform: rotate(45deg) translate(6px, 6px);
-    }
-
-    .menu-toggle:checked ~ .menu-button span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .menu-toggle:checked ~ .menu-button span:nth-child(3) {
-        transform: rotate(-45deg) translate(6px, -6px);
-    }
-
-    .nav-menu > li {
-        width: 100%;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        margin: 0;
-    }
-
-    .nav-menu > li:last-child {
-        border-bottom: none;
-    }
-
-    .nav-menu > li > a {
-        padding: var(--space-lg) var(--space-md);
-        font-size: var(--text-md);
-        width: 100%;
-        border-radius: 0;
-    }
-
-    .nav-menu > li > a::before {
-        display: none;
-    }
-
-    .dropdown.active .dropdown-menu {
-        max-height: 500px;
-    }
-
-    .dropdown-toggle {
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .dropdown-toggle::after {
-        content: '▶';
-        transition: transform 0.3s ease;
-    }
-
-    .dropdown.active .dropdown-toggle::after {
-        transform: rotate(90deg);
-    }
-
-    .dropdown-menu a {
-        padding: var(--space-md) var(--space-xl);
-        border-left: none;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    .dropdown-menu a:hover {
-        transform: none;
-        background: rgba(0, 56, 184, 0.1);
-    }
-
-    .dropdown-menu li:last-child a {
-        border-bottom: none;
-    }
-
-    .cta-list {
-        flex-direction: column;
-        gap: var(--space-sm);
-        padding: 0 var(--space-sm);
-    }
-    
-    .cta-list li {
-        min-width: 100%; 
-        width: 100%;
-        min-height: 150px; 
-        padding: var(--space-md);
-    }
-    
-    .hero img {
-        width: 85%;
-        max-width: 100%;
-    }
-    
-    .hero {
-        padding: var(--space-lg) var(--space-md);
-    }
-    
-    main {
-        width: 100%;
-        overflow-x: hidden;
-    }
-
-    footer {
-        grid-template-columns: 1fr 1fr;
-        gap: var(--space-lg);
-        padding: var(--space-lg) var(--space-md);
-        text-align: center;
-    }
-    
-    footer section {
-        align-items: center;
-        gap: var(--space-sm);
-    }
-    
-    .footer-copyright {
-        grid-column: 1 / span 2;
-        width: 100%;
-        margin-top: var(--space-md);
-        padding-top: var(--space-md);
-        font-size: var(--text-sm);
-    }
-    
-    .footer-contact p,
-    .footer-sns p,
-    .footer-legal p {
-        justify-content: center;
-        padding-left: 0;
-        font-size: 0.8rem;
-    }
-    
-    footer h3 {
-        font-size: var(--text-sm);
-        margin-bottom: var(--space-sm);
-    }
-    
-    footer a {
-        justify-content: center;
-    }
-
-    body > footer {
-        margin-left: 0;
-        margin-right: 0;
-        padding-left: var(--space-sm);
-        padding-right: var(--space-sm);
-    }
-
-    body h2 {
-        font-size: var(--text-title-2);
-        line-height: 1.2;
-        padding: var(--space-md);
-        margin-bottom: var(--space-md);
-    }
-
-    .valores h3 {
-        font-size: 1.2rem;
-        line-height: 1.2;
-        margin-bottom: var(--space-md);
-        text-align: center;
-    }
-
-    form {
-        padding: var(--space-md);
-        margin: 0;
-        width: auto;
-        min-width: 0;
-        font-size: 1rem;
-    }
-    
-    .form-group {
-        margin-bottom: var(--space-lg);
-    }
-    
-    input, textarea, select {
-        font-size: 1rem;
-        padding: var(--space-sm);
-    }
-    
-    button[type="submit"] {
-        width: 100%;
-        padding: var(--space-md);
-        font-size: var(--text-md);
-    }
-
-    .toast-auto {
-        top: 15px;
-        right: 15px;
-        left: 15px;
-        width: calc(100% - 30px);
-    }
-    
-    .toast-message {
-        padding: var(--space-md);
-        font-size: 1rem;
-        text-align: center;
-        border-radius: var(--radius-md);
-        transform: translateY(-20px);
-        animation: toastInMobile 0.5s ease 1s forwards, 
-                  toastOutMobile 0.5s ease 5s forwards;
-    }
-
-    .modal-content {
-        width: 90vw;
-        margin: 8vh auto;
-        padding: 20px;
-        font-size: 15px;
-    }
-
-    .alert-educational {
-        width: 48px;
-    }
-
-    .alert-educational:active {
-        width: 320px;
-        background: var(--pastel);
-        border-color: var(--blue-3);
-    }
-
-    .alert-educational:active .alert-preview span {
-        writing-mode: horizontal-tb;
-        transform: rotate(0deg);
-    }
-
-    .alert-educational:active .alert-content {
-        opacity: 1;
-        max-height: 500px;
-    }
-
-    .alert-educational {
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-    }
-
-    .alert-preview span {
-        font-size: 11px;
-    }
-
-    .theme-selector {
-        gap: 6px;
-        padding: 4px;
-    }
-    
-    .modern-btn {
-        width: 44px;
-        height: 44px;
-        padding: 10px;
-    }
-    
-    .btn-icon {
-        width: 22px;
-        height: 22px;
-    }
-
-}
-
-
-/* OTIMIZAÇÃO: TABLET */
-@media (max-width: 1024px) {
-    .nav-menu > li > a,
-    .dropdown-toggle {
-        min-height: 46px;
-        display: flex;
-        align-items: center;
-    }
-
-    .dropdown-menu a {
-        min-height: 46px;
-        display: flex;
-        align-items: center;
-    }
-
-    .nav-menu {
-        gap: var(--space-md);
-    }
-
-    .nav-menu > li > a {
-        padding: var(--space-lg) var(--space-md);
-        font-size: var(--text-md);
-    }
-
-    .dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        min-width: 220px;
-    }
-
-    .dropdown-menu a {
-        font-size: 1rem;
-    }
-
-    .cta-list {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-lg);
-    }
-    
-    .cta-list li {
-        min-height: 200px;
-        padding: var(--space-xl);
-        font-size: var(--text-md);
-    }
-    
-    .hero img {
-        width: 80%;
-        max-width: 650px;
-    }
-    
-    .hero {
-        padding: var(--space-xl) var(--space-lg);
-    }
-    
-    .hero h1 {
-        font-size: 1.2rem;
-    }
-
-    footer {
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--space-xl);
-        padding: var(--space-xl) var(--space-lg);
-    }
-    
-    .footer-copyright {
-        grid-column: 1 / span 3;
-        font-size: 1rem;
-    }
-    
-    .footer-contact p,
-    .footer-sns p,
-    .footer-legal p {
-        font-size: 0.95rem;
-    }
-    
-    footer h3 {
-        font-size: var(--text-md);
-    }
-
-    body h2 {
-        padding: var(--space-xl);
-    }
-
-    .valores h3 {
-        font-size: 1.4rem;
-    }
-
-    form {
-        padding: var(--space-xl);
-        max-width: 650px;
-        margin: 0 auto;
-        font-size: var(--text-md);
-    }
-    
-    input, textarea, select {
-        font-size: var(--text-md);
-        padding: var(--space-md);
-    }
-    
-    button[type="submit"] {
-        padding: var(--space-lg) var(--space-xl);
-        font-size: 1.2rem;
-    }
-
-    .toast-auto {
-        top: 25px;
-        right: 25px;
-        left: auto;
-        width: auto;
-        max-width: 450px;
-    }
-    
-    .toast-message {
-        padding: var(--space-lg);
-        font-size: var(--text-md);
-    }
-
-    .modal-content {
-        width: 80vw;
-        max-width: 650px;
-        margin: 10vh auto;
-        padding: 30px;
-        font-size: var(--text-md);
-    }
-
-    .alert-educational {
-        width: 120px;
-        padding: 22px 50px 22px 0px;
-    }
-    
-    .alert-educational:hover {
-        width: 420px;
-        padding: 25px 100px 25px 35px;
-    }
-
-    .alert-educational:active {
-        width: 420px;
-        padding: 25px 25px 25px 50px;
-    }
-
-    .alert-preview span {
+        width: 95vw;
+        margin: 5vh auto;
+        padding: 15px;
         font-size: 14px;
     }
 
-    .alert-content h3 {
-        font-size: 1.4rem;
-    }
-
-    .alert-content p {
-        font-size: 1.05rem;
-    }
-}
-
-/* OTIMIZAÇÃO: DESKTOP */
-@media (max-width: 1200px) {
-    .nav-menu > li > a,
-    .dropdown-toggle {
-        min-height: 48px;
-        display: flex;
-        align-items: center;
-    }
-
-    .dropdown-menu a {
-        min-height: 48px;
-        display: flex;
-        align-items: center;
-    }
-
-    .nav-menu {
-        gap: var(--space-lg);
-    }
-
-    .nav-menu > li > a {
-        padding: var(--space-xl) var(--space-lg);
-        font-size: 1.15rem;
-    }
-
-    .dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        min-width: 250px;
-    }
-
-    .dropdown-menu a {
-        font-size: 1.05rem;
-    }
-
-    .cta-list {
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--space-xl);
-    }
-    
-    .cta-list li {
-        min-height: 220px;
-        padding: var(--space-xxl);
-        font-size: 1.15rem;
-    }
-    
-    .hero img {
-        width: 75%;
-        max-width: 700px;
-    }
-    
-    .hero {
-        padding: var(--space-xxl) var(--space-xl);
-    }
-    
-    .hero h1 {
-        font-size: 1.2rem;
-    }
-
-    footer {
-        grid-template-columns: repeat(4, 1fr);
-        gap: var(--space-xxl);
-        padding: var(--space-xxl) var(--space-xl);
-    }
-    
-    .footer-copyright {
-        grid-column: 1 / span 4;
-        font-size: 1.05rem;
-    }
-    
-    .footer-contact p,
-    .footer-sns p,
-    .footer-legal p {
-        font-size: 1rem;
-    }
-    
-    footer h3 {
-        font-size: 1.15rem;
-    }
-
-    body h2 {
-        font-size: 2.4rem;
-        padding: var(--space-xxl);
-    }
-
-    .valores h3 {
-        font-size: 1.5rem;
-    }
-
-    form {
-        padding: var(--space-xxl);
-        max-width: 700px;
-        margin: 0 auto;
-        font-size: 1.15rem;
-    }
-    
-    input, textarea, select {
-        font-size: 1.15rem;
-        padding: var(--space-lg);
-    }
-    
-    button[type="submit"] {
-        padding: var(--space-xl) var(--space-xxl);
-        font-size: 1.25rem;
-    }
-
-    .toast-auto {
-        top: 30px;
-        right: 30px;
-        left: auto;
-        width: auto;
-        max-width: 500px;
-    }
-    
-    .toast-message {
-        padding: var(--space-xl);
-        font-size: 1.15rem;
-    }
-
-    .modal-content {
-        width: 75vw;
-        max-width: 700px;
-        margin: 12vh auto;
-        padding: 35px;
-        font-size: 1.15rem;
-    }
-
+    /* ALERTA EDUCACIONAL COMPACTO */
     .alert-educational {
-        width: 100px;
-        padding: 25px 10px 25px 10px;
+        width: 35px;
+        padding: 10px 6px;
+        border-radius: 10px 0 0 10px;
     }
 
+    /* EXPANSÃO DO ALERTA NO HOVER */
     .alert-educational:hover {
-        width: 450px;
-        padding: 25px 25px 25px 40px;
+        width: 250px;
+        padding: 12px 15px 12px 12px;
     }
 
-    .alert-educational:active {
-        width: 450px;
-        padding: 25px 80px 25px 40px;
-    }
-
+    /* TEXTO PREVIEW COM FONTE PEQUENA */
     .alert-preview span {
-        font-size: 15px;
+        font-size: 9px;
     }
 
+    /* TEXTO EXPANDIDO COM FONTE MAIOR */
+    .alert-educational:hover .alert-preview span {
+        font-size: 10px;
+    }
+
+    /* TÍTULO DO ALERTA COM TAMANHO REDUZIDO */
     .alert-content h3 {
-        font-size: 1.5rem;
+        font-size: 0.85rem;
     }
 
+    /* CONTEÚDO DO ALERTA COMPACTO */
     .alert-content p {
-        font-size: var(--text-md);
+        font-size: 0.75rem;
+        line-height: 1.2;
     }
-}
 
-/* OTIMIZAÇÃO: WIDESCREEN */
-@media (min-width: 1440px) {
-    .projetos {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-xxl);
-        max-width: 1400px;
+    /* FONTE DA ORIGEM DO ALERTA */
+    .alert-source {
+        font-size: 0.65rem;
+    }
+
+    /* NEGRITO DA ORIGEM DO ALERTA */
+    .alert-source strong {
+        font-size: 0.65rem;
+    }
+
+    /* OTIMIZAÇÃO PARA DISPOSITIVOS TÁTEIS */
+    .alert-educational {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    /* SELECTOR DE TEMAS FIXO NO TOPO */
+    .theme-selector {
+        position: fixed;
+        top: 4px;
+        left: 8px;
+        gap: 2px;
+        padding: 2px;
+        background: var(--current-background-alt);
+        border-radius: 6px;
+        border: 1px solid var(--current-border);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        z-index: 1002;
+        width: auto;
+        max-width: 85px;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    /* BOTÕES DE TEMA COMPACTOS */
+    .modern-btn {
+        width: 26px;
+        height: 26px;
+        padding: 4px;
+    }
+
+    /* ÍCONES COM DIMENSÕES REDUZIDAS */
+    .btn-icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    /* TOOLTIP COM POSIÇÃO E TAMANHO AJUSTADOS */
+    .modern-btn::after {
+        bottom: -22px;
+        font-size: 0.45rem;
+        padding: 1px 3px;
+    }
+
+    /* HEADER COM POSICIONAMENTO RELATIVO */
+    header {
+        position: relative;
+    }
+
+    /* BOTÃO MENU POSICIONADO ABSOLUTAMENTE */
+    .menu-button {
+        position: absolute;
+        left: 8px;
+        top: 50px;
+        transform: none;
+        z-index: 1000;
+        width: 30px;
+        height: 24px;
+        padding: 8px 4px;
+        box-sizing: content-box;
+    }
+
+    /* BARRAS DO MENU HAMBÚRGUER */
+    .menu-button span {
+        height: 3px;
+        margin: 2px 0;
+    }
+
+    /* MENU COM Z-INDEX ELEVADO */
+    .nav-menu {
+        z-index: 1001;
+    }
+
+    /* MODAL POSICIONADO NA PARTE INFERIOR */
+    .modal {
+        bottom: 50px;
+        left: 8px;
+        right: 8px;
+        width: calc(100% - 16px);
+    }
+
+    /* BOTÕES DO MODAL COM ÁREA DE TOQUE */
+    .modal-btn {
+        padding: 12px 20px;
+        font-size: 11px;
+        min-width: 160px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 200px;
         margin: 0 auto;
-        padding: 0 var(--space-xl);
-        align-items: stretch;
     }
 
-    .projetos article {
-        margin-bottom: 0;
-        height: auto;
+    /* OVERLAY DO MODAL CENTRALIZADO */
+    .modal-overlay {
+        padding: 10px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* CONTEÚDO DO MODAL COM ALTURA OTIMIZADA */
+    .modal-content {
+        padding: 20px;
+        border-radius: 12px;
+        max-height: 85vh;
+        width: 100%;
+        max-width: 70vw;
+        margin: 0 auto;
+        text-align: center;
         display: flex;
         flex-direction: column;
-        padding: var(--space-lg);
-        transform: scale(0.95);
+        align-items: center;
+    }
+
+    /* TÍTULO DO MODAL COM TAMANHO AJUSTADO */
+    .modal-content h3 {
+        font-size: 1.05rem;
+        margin-bottom: 12px;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* SEÇÃO DE CONTATOS DO MODAL */
+    .modal-contacts {
+        padding: 15px;
+        margin: 15px 0;
+        width: 100%;
+        text-align: left;
+    }
+
+    /* ITENS DE CONTATO EM COLUNA */
+    .contact-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        margin: 8px 0;
+        font-size: 0.82rem;
+    }
+
+    /* NOME DO CONTATO COM FONTE MAIOR */
+    .contact-item strong {
+        font-size: 0.87rem;
+    }
+
+    /* NOTA DO MODAL COM TEXTO CENTRALIZADO */
+    .modal-note {
+        font-size: 0.77rem;
+        line-height: 1.4;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* BOTÃO FECHAR MODAL COM DIMENSÕES TOUCH */
+    .modal-close {
+        padding: 12px 24px;
+        font-size: 0.87rem;
+        min-height: 44px;
+        width: 100%;
+        max-width: 140px;
+        margin-top: 15px;
+    }
+
+    /* SCROLL SUAVE PARA DISPOSITIVOS MÓVEIS */
+    .modal-content {
+        -webkit-overflow-scrolling: touch;
+        overflow-y: auto;
+    }
+
+    /* PARÁGRAFOS DO MODAL OTIMIZADOS */
+    .modal-content p {
+        font-size: 0.8rem;
+        line-height: 1.4;
+        text-align: center;
+    }
+
+    /* BOTÃO FECHAR CENTRALIZADO NO MOBILE */
+    .modal-close {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+}
+
+/*
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+/*
+/* 2. OTIMIZAÇÃO PARA TABLET  */
+@media (min-width: 481px) and (max-width: 786px) {
+
+    /* CONTAINER PRINCIPAL COM MARGENS MAIS ESTREITAS */
+    .container {
+        padding: 0 var(--space-xs);
+    }
+
+    /* SEÇÕES DE CONTEÚDO COM MARGENS MAIS COMPACTAS */
+    .sobre-nos,
+    .missao,
+    .valores,
+    .porque-kolenu,
+    .cta,
+    .projetos,
+    .doacao,
+    .voluntariado {
+        margin: 0 var(--space-xs);
+        padding: var(--space-sm) var(--space-xs);
+        max-width: calc(100% - var(--space-xs) * 2);
+        box-sizing: border-box;
+        width: 750px;
+    }
+
+    /* HERO SECTION COM MARGENS MAIS ESTREITAS */
+    .hero {
+        padding: var(--space-md) var(--space-xs);
+        margin: 0 var(--space-xs);
+        width: 740px;
+    }
+
+    /* IMAGEM DO HERO COM LARGURA CONTROLADA */
+    .hero img {
+        max-width: 100%;
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    /* FORMULÁRIOS COM MARGENS MAIS ESTREITAS */
+    form {
+        margin: 0 var(--space-xs);
+        padding: var(--space-md) var(--space-sm);
+        max-width: calc(100% - var(--space-xs) * 2);
+        box-sizing: border-box;
+    }
+
+    /* RODAPÉ COM MARGENS MAIS ESTREITAS */
+    footer {
+        padding: var(--space-md) var(--space-xs);
+        margin: 0 var(--space-xs);
+    }
+
+    /* ALERTA EDUCACIONAL — CONTAINER PRINCIPAL */
+    .alert-educational {
+        position: fixed;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        background: var(--current-background-alt);
+        border: 2px solid var(--current-primary);
+        border-left: none;
+        border-radius: 0 15px 15px 0;
+        padding: 15px;
+        width: 50px;
         transition: all 0.3s ease;
+        cursor: pointer;
+        z-index: 999;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ALERTA EDUCACIONAL — ESTADO EXPANDIDO */
+    .alert-educational.active {
+        width: 300px;
+        background: var(--current-background-alt);
+        border-color: var(--current-primary);
+    }
+
+    /* ALERTA EDUCACIONAL — TEXTO PREVIEW VERTICAL */
+    .alert-preview span {
+        color: var(--current-primary);
+        font-weight: bold;
+        font-size: 12px;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg);
+    }
+
+    /* ALERTA EDUCACIONAL — TEXTO EXPANDIDO HORIZONTAL */
+    .alert-educational.active .alert-preview span {
+        writing-mode: horizontal-tb;
+        transform: rotate(0deg);
+    }        
+}
+
+/*
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+/*
+/* 3. OTIMIZAÇÃO PARA LAPTOP  */
+@media (min-width: 787px) and (max-width: 1024px) {
+
+    /* CONTAINER PRINCIPAL COM MARGENS OTIMIZADAS */
+    .container {
+        padding: 0 var(--space-md);
+    }
+    
+    /* SEÇÕES DE CONTEÚDO COM LARGURA CONTROLADA */
+    .sobre-nos,
+    .missao,
+    .valores,
+    .porque-kolenu,
+    .cta,
+    .projetos,
+    .doacao,
+    .voluntariado {
+        margin: 0 var(--space-md);
+        padding: var(--space-lg) var(--space-md);
+        max-width: calc(100% - var(--space-md) * 2);
+    }
+    
+    /* HERO IMAGE COM LARGURA OTIMIZADA */
+    .hero img {
+        width: 40%;
+        max-width: 400px;
+    }
+    
+    /* HERO SECTION COM ESPAÇAMENTO AJUSTADO */
+    .hero {
+        padding: var(--space-xs) var(--space-md);
+    }
+    
+    /* FORMULÁRIOS COM MARGENS BALANCEADAS */
+    form {
+        margin: 0 var(--space-md);
+        padding: var(--space-xl) var(--space-lg);
+    }
+    
+    /* RODAPÉ COM PADDING OTIMIZADO */
+    footer {
+        padding: var(--space-xl) var(--space-md);
+    }
+
+    /* MODAL COM DIMENSÕES OTIMIZADAS */
+    .modal-content {
+        max-width: 600px;
+        width: 80%;
+        padding: var(--space-xl);
+    }
+    
+    /* BOTÃO MODAL COM POSICIONAMENTO AJUSTADO */
+    .modal-btn {
+        padding: 14px 28px;
+        font-size: 15px;
+        min-width: 220px;
+    }
+}
+
+/*
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+/*
+/* 4. OTIMIZAÇÃO PARA DESKTOP  */
+@media (min-width: 1025px) and (max-width: 1440px) {
+
+    /* HERO IMAGE — DIMENSÕES AMPLIADAS PARA DESKTOP */
+    .hero img {
+        width: 45%;
+        max-width: 500px;
+    }
+
+    /* SEÇÕES DE CONTEÚDO — LARGURA EXPANDIDA */
+    .sobre-nos,
+    .missao,
+    .valores,
+    .porque-kolenu,
+    .cta,
+    .projetos,
+    .doacao,
+    .voluntariado {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: var(--space-xl) var(--space-lg);
+    }
+
+    /* LISTA DE VALORES — LAYOUT GRID DUAS COLUNAS */
+    .lista-valores {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-xl);
+    }
+
+    /* CTA LIST — ESPAÇAMENTO ENTRE CARDS AMPLIADO */
+    .cta-list {
+        gap: var(--space-xl);
+    }
+
+    /* NAVEGAÇÃO PRINCIPAL — ESPAÇAMENTO ENTRE ITENS */
+    .nav-menu {
+        gap: var(--space-2xl);
+    }
+
+    /* CARDS CTA — ALTURA E PADDING AUMENTADOS */
+    .cta-list li {
+        min-height: 220px;
+        padding: var(--space-xl);
+    }
+}
+
+/*
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+/*
+/* 5. OTIMIZAÇÃO PARA WIDESCREEN  */
+@media (min-width: 1441px) {
+    
+    /* INICIATIVAS — GRID PARA OS CARDS */
+    .projetos {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-xl);
+        max-width: 1400px;
+    }
+    
+    /* TÍTULO — OCUPA DUAS COLUNAS */
+    .projetos > h2 {
+        grid-column: 1 / -1;
+    }
+    
+    /* CARDS — ALTURA CONTROLADA */
+    .projetos > article {
         min-height: 400px;
     }
 
-    .projetos article:hover {
-        transform: scale(0.95) translateY(-8px);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    /* HERO IMAGE — ESCALA MAIOR PARA WIDESCREEN */
+    .hero img {
+        width: 35%;
+        max-width: 550px;
     }
-
-    .projetos h2 {
-        grid-column: 1 / -1;
-        text-align: center;
-        margin-bottom: var(--space-xxl);
+    
+    /* CONTEÚDO PRINCIPAL — LARGURA MÁXIMA EXPANDIDA */
+    .sobre-nos,
+    .missao,
+    .valores,
+    .porque-kolenu,
+    .cta,
+    .doacao,
+    .voluntariado {
+        max-width: 1200px;
     }
-
-    .projetos article:first-child,
-    .projetos article:nth-child(2),
-    .projetos article:nth-child(3),
-    .projetos article:nth-child(4),
-    .projetos article:nth-child(5) {
-        border-left: 4px solid var(--blue-3);
+    
+    /* LISTA DE VALORES — ESPAÇAMENTO AMPLIADO */
+    .lista-valores {
+        gap: var(--space-2xl);
+    }
+    
+    /* CTA LIST — ESPAÇAMENTO MAIOR ENTRE CARDS */
+    .cta-list {
+        gap: var(--space-2xl);
+    }
+    
+    /* NAVEGAÇÃO — ESPAÇAMENTO MÁXIMO */
+    .nav-menu {
+        gap: var(--space-2xl);
     }
 }
