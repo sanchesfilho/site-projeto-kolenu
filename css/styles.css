@@ -2861,6 +2861,7 @@ fieldset div input#complemento:not(:placeholder-shown) {
 */
 /* 1. OTIMIZAÇÃO PARA SMARTPHONE  */
 @media (max-width: 480px) {
+
     /* ÁREAS DE CLIQUE AMPLAS PARA TOUCH */
     .nav-menu > li > a,
     .dropdown-toggle {
@@ -2868,12 +2869,20 @@ fieldset div input#complemento:not(:placeholder-shown) {
         display: flex;
         align-items: center;
     }
+    
+    /* MENU DROPDOWN */
+    .dropdown-menu {
+        background: var(--current-background-alt);
+    }
 
     /* LINKS DROPDOWN COM ALTURA MÍNIMA PARA TOCAR */
     .dropdown-menu a {
         min-height: 44px;
         display: flex;
         align-items: center;
+        color: var(--current-text);
+        background: var(--current-background-alt);
+        border-bottom: 1px solid var(--current-border);
     }
 
     /* EXIBIÇÃO DO BOTÃO MENU HAMBÚRGUER */
@@ -2898,6 +2907,8 @@ fieldset div input#complemento:not(:placeholder-shown) {
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 999;
         overflow-y: auto;
+        background: var(--current-nav-bg);
+        border-right: 1px solid var(--current-border);
     }
 
     /* ESPAÇAMENTO SUPERIOR DO PRIMEIRO ITEM */
@@ -2930,6 +2941,7 @@ fieldset div input#complemento:not(:placeholder-shown) {
         width: 100%;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         margin: 0;
+        border-bottom: 1px solid var(--current-border);
     }
 
     /* REMOÇÃO DA BORDA DO ÚLTIMO ITEM */
@@ -2943,11 +2955,18 @@ fieldset div input#complemento:not(:placeholder-shown) {
         font-size: var(--text-md);
         width: 100%;
         border-radius: 0;
+        color: var(--current-text);
+        background: var(--current-nav-bg);
     }
 
     /* REMOÇÃO DO PSEUDO-ELEMENTO DECORATIVO */
     .nav-menu > li > a::before {
         display: none;
+    }
+
+    .nav-menu > li > a:hover {
+        background: var(--current-background);
+        color: var(--current-primary);
     }
 
     /* EXPANSÃO DO DROPDOWN ATIVO */
@@ -2959,12 +2978,20 @@ fieldset div input#complemento:not(:placeholder-shown) {
     .dropdown-toggle {
         justify-content: space-between;
         width: 100%;
+        color: var(--current-text);
+        background: var(--current-nav-bg);
     }
 
     /* SETA DO DROPDOWN (TRIÂNGULO) */
     .dropdown-toggle::after {
         content: '▶';
         transition: transform 0.3s ease;
+    }
+
+    /* EFEITO HOVER PARA BOTÃO DROPDOWN */
+    .dropdown-toggle:hover {
+        background: var(--current-background);
+        color: var(--current-primary);
     }
 
     /* ROTAÇÃO DA SETA QUANDO ATIVO */
@@ -2982,7 +3009,8 @@ fieldset div input#complemento:not(:placeholder-shown) {
     /* HOVER SUAVE NOS ITENS DO SUBMENU */
     .dropdown-menu a:hover {
         transform: none;
-        background: rgba(0, 56, 184, 0.1);
+        background: var(--current-background);
+        color: var(--current-primary);
     }
 
     /* REMOÇÃO DA BORDA DO ÚLTIMO ITEM */
