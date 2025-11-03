@@ -4,257 +4,171 @@ DESENVOLVIDO POR: JAYME SANCHES FILHO
 INSTITUIÇÃO: UNIVERSIDADE CRUZEIRO DO SUL
 DISCIPLINA: DESENVOLVIMENTO FRONT—END PARA WEB
 EXPERIÊNCIA PRÁTICA — ENTREGA 4 (VERSIONAMENTO, ACESSIBILIDADE E DEPLOY)
-DATA: 03/11/2025
+DATA: 04/11/2025
  -->
 
-<!-- INDEX.HTML — ARQUIVO HTML5 OTIMIZADO PARA NAVEGAÇÃO SPA E GERENCIAMENTO DE TEMPLATES JAVASCRIPT-->
-
-<!DOCTYPE html> 
-
-<!-- ESPECIFICA O IDIOMA E REGIÃO PARA ACESSIBILIDADE E SEO -->
-<html lang="pt-BR">
-
-    <head>
-        <title>Projeto KOLENU | Início</title>
-        <meta charset="UTF-8">
-
-        <!-- CONFIGURA A ÁREA VISÍVEL E ESCALA INICIAL PARA DISPOSITIVOS MÓVEIS (RESPONSIVE DESIGN) -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        
-        <!-- DEFINE A DESCRIÇÃO DA PÁGINA PARA MOTORES DE BUSCA E REDES SOCIAIS -->
-        <meta name="description" content="Projeto Kolenu — Combate ao antissemitismo através da educação e do diálogo.">
-
-        <!-- DEFINE O ARQUIVO DE ESTILIZAÇÃO (CSS) -->
-        <link rel="stylesheet" href="css/styles.css">
-
-        <!-- DEFINIÇÃO DE ARQUIVOS DE JAVASCRIPT (JS) -->
-        <!-- 1. JS: IMPLEMENTA NAVEGAÇÃO SPA -->
-        <script src="js/spa-router.js"></script>
-
-        <!-- 2. JS: IMPLEMENTA VALIDAÇÃO JAVASCRIPT DO FORMULÁRIO -->
-        <script src="js/form-validator.js"></script>
-
-        <!-- 3. JS: IMPLEMENTA SISTEMA DE TEMPLATES DINÂMICOS -->
-        <script src="js/templates.js"></script>
-
-        <!-- 4. JS: IMPLEMENTA SISTEMA DE NAVEGAÇÃO POR TECLADO -->
-        <script src="js/keyboard-navigator.js"></script>
-        
-        <!-- 5. JS: IMPLEMENTA SUPORTE PARA LEITORES DE TELA -->
-        <script src="js/aria-manager.js"></script>
-
-        <!-- 6. JS: IMPLEMENTA CONTROLE DE MODOS DE VISUALIZAÇÃO -->
-        <script src="js/theme-switcher.js"></script>
-        
-        <!-- 7. JS: IMPLEMENTA MENU MOBILE JAVASCRIPT (MELHOR FUNCIONALIDADE E INTERATIVIDADE) -->
-        <script src="js/mobile-menu.js"></script>
+<!-- INDEX.HTML — ARQUIVO HTML5 OTIMIZADO PARA NAVEGAÇÃO SPA E GERENCIAMENTO DE TEMPLATES JAVASCRIPT
+     COM MINIFICAÇÃO COMPLETA IMPLEMENTADA -->
 
 
-        <!-- DEFINE O FAVICON -->
-        <link rel="icon" type="image/x-icon" href="img/favicon/favicon.ico">
-        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
-    </head>
-
-    <body class="grid-12">
-        <!-- SKIP LINK — ACESSKEY PARA NAVEGAÇÃO POR TECLADO
-        VISÍVEL APENAS QUANDO FOCADO COM A TECLA TAB -->
-        <a href="#app" class="skip-link">Ir para o conteúdo principal</a>
-
-        <!-- ALERT: NOTA EDUCATIVA -->
-                <div class="alert-educational" aria-hidden="false">
-                    <div class="alert-preview">
-                        <span>Você Sabia?</span>
-                    </div>
-                    
-                    <div class="alert-content">
-                        <h3>Sempre vigilantes!</h3>
-                        <p>O antissemitismo é uma ameaça persistente que se adapta e se atualiza através dos séculos.<br>
-                            A educação e a conscientização têm papel fundamental no combate à desinformação,
-                            criando leitores críticos que saibam diferenciar verdades e inverdades na <em>web</em>.
-                        </p>
-                        <div class="alert-source">
-                            <strong>Projeto KOLENU</strong>
-                        </div>
-                    </div>
-                </div>        
-
-        <header>
-
-            <!-- ACESSIBILIDADE: SELETOR DE TEMAS (MODOS CLARO, ESCURO, ALTO CONTRASTE) -->
-            <div class="theme-selector" aria-label="Seletor de modo de visualização">
-                <button class="theme-btn modern-btn" data-theme="light" aria-pressed="true">
-                    <div class="btn-content">
-                        <div class="btn-icon">
-                            <img src="img/button-light-theme.svg" alt="Modo claro" class="theme-icon" aria-hidden="true">
-                        </div>
-                    </div>
-                    <div class="btn-ripple" aria-hidden="true"></div>
-                </button>
-                
-                <button class="theme-btn modern-btn" data-theme="dark" aria-pressed="false">
-                    <div class="btn-content">
-                        <div class="btn-icon">
-                            <img src="img/button-dark-theme.svg" alt="Modo escuro" class="theme-icon" aria-hidden="true">
-                        </div>
-                    </div>
-                    <div class="btn-ripple" aria-hidden="true"></div>
-                </button>
-                
-                <button class="theme-btn modern-btn" data-theme="highcontrast" aria-pressed="false">
-                    <div class="btn-content">
-                        <div class="btn-icon">
-                            <img src="img/button-highcontrast-theme.svg" alt="Modo alto contraste" class="theme-icon" aria-hidden="true">
-                        </div>
-                    </div>
-                    <div class="btn-ripple" aria-hidden="true"></div>
-                </button>
-            </div>
-
-            <!-- REGIÃO ARIA-LIVE PARA ANÚNCIOS DE MUDANÇA DE TEMA
-            ANUNCIA AUTOMATICAMENTE MUDANÇAS DE MODO DE VISUALIZAÇÃO -->
-            <div id="theme-announcement" aria-live="polite" aria-atomic="true" class="sr-only"></div>
-
-            <!-- TOAST: BEM-VINDO -->
-                <div class="toast-auto" aria-live="polite" aria-atomic="true">
-                    <div class="toast-message">
-                        <span aria-hidden="true">🕊️</span> Bem-vindo ao Projeto Kolenu!
-                    </div>
-                </div>
-
-            <!-- NAV: MENU DE NAVEGAÇÃO -->
-            <nav aria-label="Menu de navegação">
-                
-                <!-- MENU HAMBÚRGUER (MOBILE) -->
-                <input type="checkbox" id="menu-toggle" class="menu-toggle">
-                <label for="menu-toggle" class="menu-button" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menu de navegação">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span class="sr-only">Menu</span>
-                </label>
-                
-                <ul class="nav-menu" id="nav-menu" role="menubar">
-                    <li role="none"><a href="#/" role="menuitem">Início</a></li>
-                    
-                    <!-- ITEM COM SUBMENU DROPDOWN (DESKTOP) -->
-                    <li class="dropdown" role="none">
-                        <a href="#/projetos" class="dropdown-toggle"
-                        role="menuitem" 
-                        aria-expanded="false" 
-                        aria-haspopup="true"
-                        aria-controls="dropdown-projetos">
-                        Iniciativas
-                        </a>
-                        
-                        <ul class="dropdown-menu" id="dropdown-projetos" role="menu">
-                            <li role="none"><a href="#/projetos#spark" role="menuitem">KOLENU Spark</a></li>
-                            <li role="none"><a href="#/projetos#echo" role="menuitem">KOLENU Echo</a></li>
-                            <li role="none"><a href="#/projetos#nexus" role="menuitem">KOLENU Nexus</a></li>
-                            <li role="none"><a href="#/projetos#watch" role="menuitem">KOLENU Watch</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li role="none"><a href="#/cadastro" role="menuitem">Apoie</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        
-        <!-- CONTAINER PRINCIPAL DA APLICAÇÃO SPA
-        CONTEÚDO DINÂMICO SERÁ INJETADO VIA TEMPLATES.JS -->
-        <main id="app" role="main" aria-label="Conteúdo principal"></main>
-
-        <!-- FOOTER COM GRID DE 12 COLUNAS CUSTOMIZADO
-        CONTATO, REDES SOCIAIS, E DOCUMENTAÇÃO LEGAL (LINKS SIMBÓLICOS)-->
-        <footer>
-            <div class="col-4">
-                <section class="footer-contact">
-                    <h3>Contato</h3>
-
-                    <!-- EMOJIS DECORATIVOS COM ARIA-HIDDEN PARA EVITAR LEITURA REDUNDANTE -->
-                    <p><span aria-hidden="true">📧</span> <a href="mailto:contato@kolenu.org.br">contato@kolenu.org.br</a></p>
-                    <p><span aria-hidden="true">📞</span> <a href="tel:+5512123456789">(12) 12345-6789</a></p>
-
-                </section>
-            </div>
-
-            <div class="col-4">
-                <section class="footer-sns">
-                    <h3>Redes Sociais</h3>
-                    <p>
-                        <!-- ARIA-LABEL CUSTOMIZADA PARA ASSEGURAR A PRONÚNCIA ADEQUADA POR TECNOLOGIAS ASSISTIVAS -->
-                        <a href="#" aria-label="INSTA GRAN"><img src="img/icon-sns-ig.svg" alt="Instagram">
-                            Instagram
-                        </a>
-                    </p>
-                    <p>
-                        <!-- ARIA-LABEL CUSTOMIZADA PARA ASSEGURAR A PRONÚNCIA ADEQUADA POR TECNOLOGIAS ASSISTIVAS -->
-                        <a href="#" aria-label="X PONTO COM"><img src="img/icon-sns-x.svg" alt="X">
-                            X.com
-                        </a>
-                    </p>
-                    <p>
-                        <a href="#" aria-label="YouTube"><img src="img/icon-sns-yt.svg" alt="YouTube">
-                            YouTube</a>
-                    </p>
-                </section>
-            </div>
-            
-            <div class="col-4">
-                <section class="footer-legal">
-                    <h3>Termos e Privacidade</h3>
-                    <p><a href="#">Política de Privacidade</a></p>
-                    <p><a href="#">Termos de Uso</a></p>
-                </section>
-            </div>
-            
-            <!-- COPYRIGHT NOTICE -->
-            <div class="col-12">
-                <p class="footer-copyright">&copy; 2025 Projeto Kolenu. Todos os direitos reservados.</p>
-            </div>
-        </footer>
-
-    </body>
-
-    <!-- MODAL: CTA — REPORTE DE INCIDENTES -->
-    <div class="modal">
-
-        <!-- BOTÃO DO MODAL COM INDICAÇÃO DE POPUP DIALOG -->
-        <button class="modal-btn" aria-expanded="false" aria-controls="modal-content" aria-haspopup="dialog">
-            <span aria-hidden="true">📢</span> REPORTE INCIDENTES
-        </button>
-
-        <div class="modal-overlay" id="modal-overlay" aria-hidden="true">
-
-            <!-- CONTEÚDO DO MODAL COM DESCRIÇÃO ADICIONAL PARA LEITORES DE TELA -->
-            <div class="modal-content" id="modal-content" role="dialog" 
-                 aria-labelledby="modal-title" aria-modal="true" aria-describedby="modal-desc">
-                <h3 id="modal-title">NÃO SE CALE!</h3>
-
-                <!-- DESCRIÇÃO DO MODAL PARA CONTEXTO ADICIONAL -->
-                <div id="modal-desc">
-                    <p>
-                        Se você testemunhou ou foi vítima de discriminação antissemita, estamos aqui para ajudar.
-                        <br>Envie-nos uma mensagem com o máximo de detalhes possível acerca do ocorrido, e nossa equipe
-                        avaliará o caso com cuidado e responsabilidade.
-                        <br>Seu relato é extremamente importante para nosso mapeamento de incidentes antissemitas pelo país.
-                    </p>
-                </div>
-                <div class="modal-contacts">
-                    <div class="contact-item">
-
-                        <!-- EMOJI DECORATIVO COM ARIA-HIDDEN -->
-                        <strong><span aria-hidden="true">📧</span> E-mail:</strong>
-                        
-                        <span>contato@kolenu.org.br</span>
-                    </div>
-                </div>
-                <p class="modal-note">Todas as denúncias são tratadas com absoluto sigilo.</p>
-                <button class="modal-close" aria-label="Fechar modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-
+<!doctype html>
+<html lang=pt-BR>
+<head>
+<title>Projeto KOLENU | Início</title>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Projeto Kolenu — Combate ao antissemitismo através da educação e do diálogo.">
+<link rel=stylesheet href=css/styles.min.css>
+<script src=js/spa-router.min.js></script>
+<script src=js/form-validator.min.js></script>
+<script src=js/templates.min.js></script>
+<script src=js/keyboard-navigator.min.js></script>
+<script src=js/aria-manager.min.js></script>
+<script src=js/theme-switcher.min.js></script>
+<script src=js/mobile-menu.min.js></script>
+<link rel=icon type=image/x-icon href=img/favicon/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=img/favicon/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=img/favicon/favicon-16x16.png>
+<link rel=apple-touch-icon sizes=180x180 href=img/favicon/apple-touch-icon.png>
+</head>
+<body class=grid-12>
+<a href=#app class=skip-link>Ir para o conteúdo principal</a>
+<div class=alert-educational aria-hidden=false>
+<div class=alert-preview>
+<span>Você Sabia?</span>
+</div>
+<div class=alert-content>
+<h3>Sempre vigilantes!</h3>
+<p>O antissemitismo é uma ameaça persistente que se adapta e se atualiza através dos séculos.<br>
+A educação e a conscientização têm papel fundamental no combate à desinformação, criando leitores críticos que saibam diferenciar verdades e inverdades na <em>web</em>.
+</p>
+<div class=alert-source>
+<strong>Projeto KOLENU</strong>
+</div>
+</div>
+</div>
+<header>
+<div class=theme-selector aria-label="Seletor de modo de visualização">
+<button class="theme-btn modern-btn" data-theme=light aria-pressed=true>
+<div class=btn-content>
+<div class=btn-icon>
+<img src=img/button-light-theme.svg alt="Modo claro" class=theme-icon aria-hidden=true>
+</div>
+</div>
+<div class=btn-ripple aria-hidden=true></div>
+</button>
+<button class="theme-btn modern-btn" data-theme=dark aria-pressed=false>
+<div class=btn-content>
+<div class=btn-icon>
+<img src=img/button-dark-theme.svg alt="Modo escuro" class=theme-icon aria-hidden=true>
+</div>
+</div>
+<div class=btn-ripple aria-hidden=true></div>
+</button>
+<button class="theme-btn modern-btn" data-theme=highcontrast aria-pressed=false>
+<div class=btn-content>
+<div class=btn-icon>
+<img src=img/button-highcontrast-theme.svg alt="Modo alto contraste" class=theme-icon aria-hidden=true>
+</div>
+</div>
+<div class=btn-ripple aria-hidden=true></div>
+</button>
+</div>
+<div id=theme-announcement aria-live=polite aria-atomic=true class=sr-only></div>
+<div class=toast-auto aria-live=polite aria-atomic=true>
+<div class=toast-message>
+<span aria-hidden=true>🕊️</span> Bem-vindo ao Projeto Kolenu!
+</div>
+</div>
+<nav aria-label="Menu de navegação">
+<input type=checkbox id=menu-toggle class=menu-toggle>
+<label for=menu-toggle class=menu-button aria-expanded=false aria-controls=nav-menu aria-label="Abrir menu de navegação">
+<span aria-hidden=true></span>
+<span aria-hidden=true></span>
+<span aria-hidden=true></span>
+<span class=sr-only>Menu</span>
+</label>
+<ul class=nav-menu id=nav-menu role=menubar>
+<li role=none><a href=#/ role=menuitem>Início</a></li>
+<li class=dropdown role=none>
+<a href=#/projetos class=dropdown-toggle role=menuitem aria-expanded=false aria-haspopup=true aria-controls=dropdown-projetos>
+Iniciativas
+</a>
+<ul class=dropdown-menu id=dropdown-projetos role=menu>
+<li role=none><a href=#/projetos#spark role=menuitem>KOLENU Spark</a></li>
+<li role=none><a href=#/projetos#echo role=menuitem>KOLENU Echo</a></li>
+<li role=none><a href=#/projetos#nexus role=menuitem>KOLENU Nexus</a></li>
+<li role=none><a href=#/projetos#watch role=menuitem>KOLENU Watch</a></li>
+</ul>
+</li>
+<li role=none><a href=#/cadastro role=menuitem>Apoie</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=app role=main aria-label="Conteúdo principal"></main>
+<footer>
+<div class=col-4>
+<section class=footer-contact>
+<h3>Contato</h3>
+<p><span aria-hidden=true>📧</span> <a href=mailto:contato@kolenu.org.br>contato@kolenu.org.br</a></p>
+<p><span aria-hidden=true>📞</span> <a href=tel:+5512123456789>(12) 12345-6789</a></p>
+</section>
+</div>
+<div class=col-4>
+<section class=footer-sns>
+<h3>Redes Sociais</h3>
+<p>
+<a href=# aria-label="INSTA GRAN"><img src=img/icon-sns-ig.svg alt=Instagram>
+Instagram
+</a>
+</p>
+<p>
+<a href=# aria-label="X PONTO COM"><img src=img/icon-sns-x.svg alt=X>
+X.com
+</a>
+</p>
+<p>
+<a href=# aria-label=YouTube><img src=img/icon-sns-yt.svg alt=YouTube>
+YouTube</a>
+</p>
+</section>
+</div>
+<div class=col-4>
+<section class=footer-legal>
+<h3>Termos e Privacidade</h3>
+<p><a href=#>Política de Privacidade</a></p>
+<p><a href=#>Termos de Uso</a></p>
+</section>
+</div>
+<div class=col-12>
+<p class=footer-copyright>&copy; 2025 Projeto Kolenu. Todos os direitos reservados.</p>
+</div>
+</footer>
+</body>
+<div class=modal>
+<button class=modal-btn aria-expanded=false aria-controls=modal-content aria-haspopup=dialog>
+<span aria-hidden=true>📢</span> REPORTE INCIDENTES
+</button>
+<div class=modal-overlay id=modal-overlay aria-hidden=true>
+<div class=modal-content id=modal-content role=dialog aria-labelledby=modal-title aria-modal=true aria-describedby=modal-desc>
+<h3 id=modal-title>NÃO SE CALE!</h3>
+<div id=modal-desc>
+<p>
+Se você testemunhou ou foi vítima de discriminação antissemita, estamos aqui para ajudar.
+<br>Envie-nos uma mensagem com o máximo de detalhes possível acerca do ocorrido, e nossa equipe avaliará o caso com cuidado e responsabilidade.
+<br>Seu relato é extremamente importante para nosso mapeamento de incidentes antissemitas pelo país.
+</p>
+</div>
+<div class=modal-contacts>
+<div class=contact-item>
+<strong><span aria-hidden=true>📧</span> E-mail:</strong>
+<span>contato@kolenu.org.br</span>
+</div>
+</div>
+<p class=modal-note>Todas as denúncias são tratadas com absoluto sigilo.</p>
+<button class=modal-close aria-label="Fechar modal">Fechar</button>
+</div>
+</div>
+</div>
 </html>
