@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // FUNÇÃO PRINCIPAL — CONFIGURA TODOS OS ELEMENTOS DO MENU MOBILE
 function inicializarMenuMobile() {
+    
     // CAPTURA ELEMENTOS DO DOM
     menuToggle = document.querySelector('.menu-button');
     navMenu = document.querySelector('.nav-menu');
@@ -143,15 +144,37 @@ function toggleMenu() {
     }
 }
 
+// ANIMAÇÃO DO BOTÃO HAMBÚRGUER — TRANSFORMAÇÃO EM X
+function animarHamburguer(abrir) {
+    const spans = menuToggle.querySelectorAll('span');
+    
+    if (abrir) {
+
+        // TRANSFORMAÇÃO: HAMBÚRGUER → X
+        spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+    } else {
+        
+        // TRANSFORMAÇÃO: X → HAMBÚRGUER
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+    }
+}
+
 // ABRE MENU MOBILE COM ANIMAÇÃO
 function abrirMenu() {
     navMenu.style.display = 'flex';
     
-    // ANIMAÇÃO DE ENTRADA
+    // ANIMAÇÃO DE ENTRADA DO MENU
     setTimeout(() => {
         navMenu.style.transform = 'translateX(0)';
         navMenu.style.opacity = '1';
     }, 10);
+    
+    // ANIMAÇÃO DO BOTÃO HAMBÚRGUER — TRANSFORMA EM X
+    animarHamburguer(true);
     
     // ATUALIZA ESTADO E ATRIBUTOS ARIA
     isMenuOpen = true;
@@ -179,6 +202,9 @@ function fecharMenu() {
     setTimeout(() => {
         navMenu.style.display = 'none';
     }, 300);
+    
+    // ANIMAÇÃO DO BOTÃO HAMBÚRGUER — VOLTA PARA HAMBÚRGUER
+    animarHamburguer(false);
     
     // ATUALIZA ESTADO E ATRIBUTOS ARIA
     isMenuOpen = false;
@@ -426,6 +452,9 @@ function restaurarMenuDesktop() {
             }
         });
     }
+    
+    // RESTAURA ANIMAÇÃO DO HAMBÚRGUER PARA ESTADO ORIGINAL
+    animarHamburguer(false);
     
     // RESTAURA ESTILOS DOS ITENS DO MENU
     const menuItems = document.querySelectorAll('.nav-menu > li');
