@@ -4,7 +4,7 @@ DESENVOLVIDO POR: JAYME SANCHES FILHO
 INSTITUIÇÃO: UNIVERSIDADE CRUZEIRO DO SUL
 DISCIPLINA: DESENVOLVIMENTO FRONT—END PARA WEB
 EXPERIÊNCIA PRÁTICA — ENTREGA 4 (VERSIONAMENTO, ACESSIBILIDADE E DEPLOY)
-DATA: 02/11/2025
+DATA: 03/11/2025
  -->
 
 <!-- INDEX.HTML — ARQUIVO HTML5 OTIMIZADO PARA NAVEGAÇÃO SPA E GERENCIAMENTO DE TEMPLATES JAVASCRIPT-->
@@ -60,10 +60,10 @@ DATA: 02/11/2025
     <body class="grid-12">
         <!-- SKIP LINK — ACESSKEY PARA NAVEGAÇÃO POR TECLADO
         VISÍVEL APENAS QUANDO FOCADO COM A TECLA TAB -->
-        <a href="#main-content" class="skip-link">Ir para o conteúdo principal</a>
+        <a href="#app" class="skip-link">Ir para o conteúdo principal</a>
 
         <!-- ALERT: NOTA EDUCATIVA -->
-                <div class="alert-educational">
+                <div class="alert-educational" aria-hidden="false">
                     <div class="alert-preview">
                         <span>Você Sabia?</span>
                     </div>
@@ -87,35 +87,39 @@ DATA: 02/11/2025
                 <button class="theme-btn modern-btn" data-theme="light" aria-pressed="true">
                     <div class="btn-content">
                         <div class="btn-icon">
-                            <img src="img/button-light-theme.svg" alt="Modo claro" class="theme-icon">
+                            <img src="img/button-light-theme.svg" alt="Modo claro" class="theme-icon" aria-hidden="true">
                         </div>
                     </div>
-                    <div class="btn-ripple"></div>
+                    <div class="btn-ripple" aria-hidden="true"></div>
                 </button>
                 
                 <button class="theme-btn modern-btn" data-theme="dark" aria-pressed="false">
                     <div class="btn-content">
                         <div class="btn-icon">
-                            <img src="img/button-dark-theme.svg" alt="Modo escuro" class="theme-icon">
+                            <img src="img/button-dark-theme.svg" alt="Modo escuro" class="theme-icon" aria-hidden="true">
                         </div>
                     </div>
-                    <div class="btn-ripple"></div>
+                    <div class="btn-ripple" aria-hidden="true"></div>
                 </button>
                 
                 <button class="theme-btn modern-btn" data-theme="highcontrast" aria-pressed="false">
                     <div class="btn-content">
                         <div class="btn-icon">
-                            <img src="img/button-highcontrast-theme.svg" alt="Modo alto contraste" class="theme-icon">
+                            <img src="img/button-highcontrast-theme.svg" alt="Modo alto contraste" class="theme-icon" aria-hidden="true">
                         </div>
                     </div>
-                    <div class="btn-ripple"></div>
+                    <div class="btn-ripple" aria-hidden="true"></div>
                 </button>
             </div>
 
+            <!-- REGIÃO ARIA-LIVE PARA ANÚNCIOS DE MUDANÇA DE TEMA
+            ANUNCIA AUTOMATICAMENTE MUDANÇAS DE MODO DE VISUALIZAÇÃO -->
+            <div id="theme-announcement" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
             <!-- TOAST: BEM-VINDO -->
-                <div class="toast-auto">
+                <div class="toast-auto" aria-live="polite" aria-atomic="true">
                     <div class="toast-message">
-                        🕊️ Bem-vindo ao Projeto Kolenu!
+                        <span aria-hidden="true">🕊️</span> Bem-vindo ao Projeto Kolenu!
                     </div>
                 </div>
 
@@ -124,10 +128,10 @@ DATA: 02/11/2025
                 
                 <!-- MENU HAMBÚRGUER (MOBILE) -->
                 <input type="checkbox" id="menu-toggle" class="menu-toggle">
-                <label for="menu-toggle" class="menu-button" aria-expanded="false" aria-controls="nav-menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <label for="menu-toggle" class="menu-button" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menu de navegação">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
                     <span class="sr-only">Menu</span>
                 </label>
                 
@@ -168,17 +172,33 @@ DATA: 02/11/2025
             <div class="col-4">
                 <section class="footer-contact">
                     <h3>Contato</h3>
-                    <p>📧 <a href="mailto:contato@kolenu.org.br">contato@kolenu.org.br</a></p>
-                    <p>📞 <a href="tel:+5512123456789">(12) 12345-6789</a></p>
+
+                    <!-- EMOJIS DECORATIVOS COM ARIA-HIDDEN PARA EVITAR LEITURA REDUNDANTE -->
+                    <p><span aria-hidden="true">📧</span> <a href="mailto:contato@kolenu.org.br">contato@kolenu.org.br</a></p>
+                    <p><span aria-hidden="true">📞</span> <a href="tel:+5512123456789">(12) 12345-6789</a></p>
+
                 </section>
             </div>
 
             <div class="col-4">
                 <section class="footer-sns">
                     <h3>Redes Sociais</h3>
-                    <p><a href="#" aria-label="Instagram"><img src="img/icon-sns-ig.svg" alt="Instagram"> Instagram</a></p>
-                    <p><a href="#" aria-label="X"><img src="img/icon-sns-x.svg" alt="X"> X.com</a></p>
-                    <p><a href="#" aria-label="YouTube"><img src="img/icon-sns-yt.svg" alt="YouTube"> YouTube</a></p>
+                    <p>
+                        <!-- ARIA-LABEL CUSTOMIZADA PARA ASSEGURAR A PRONÚNCIA ADEQUADA POR TECNOLOGIAS ASSISTIVAS -->
+                        <a href="#" aria-label="INSTA GRAN"><img src="img/icon-sns-ig.svg" alt="Instagram">
+                            Instagram
+                        </a>
+                    </p>
+                    <p>
+                        <!-- ARIA-LABEL CUSTOMIZADA PARA ASSEGURAR A PRONÚNCIA ADEQUADA POR TECNOLOGIAS ASSISTIVAS -->
+                        <a href="#" aria-label="X PONTO COM"><img src="img/icon-sns-x.svg" alt="X">
+                            X.com
+                        </a>
+                    </p>
+                    <p>
+                        <a href="#" aria-label="YouTube"><img src="img/icon-sns-yt.svg" alt="YouTube">
+                            YouTube</a>
+                    </p>
                 </section>
             </div>
             
@@ -200,21 +220,34 @@ DATA: 02/11/2025
 
     <!-- MODAL: CTA — REPORTE DE INCIDENTES -->
     <div class="modal">
-        <button class="modal-btn" aria-expanded="false" aria-controls="modal-content">
-            📢 REPORTE INCIDENTES
+
+        <!-- BOTÃO DO MODAL COM INDICAÇÃO DE POPUP DIALOG -->
+        <button class="modal-btn" aria-expanded="false" aria-controls="modal-content" aria-haspopup="dialog">
+            <span aria-hidden="true">📢</span> REPORTE INCIDENTES
         </button>
-        <div class="modal-overlay" id="modal-overlay">
-            <div class="modal-content" id="modal-content" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+
+        <div class="modal-overlay" id="modal-overlay" aria-hidden="true">
+
+            <!-- CONTEÚDO DO MODAL COM DESCRIÇÃO ADICIONAL PARA LEITORES DE TELA -->
+            <div class="modal-content" id="modal-content" role="dialog" 
+                 aria-labelledby="modal-title" aria-modal="true" aria-describedby="modal-desc">
                 <h3 id="modal-title">NÃO SE CALE!</h3>
-                <p>
-                    Se você testemunhou ou foi vítima de discriminação antissemita, estamos aqui para ajudar.
-                    <br>Envie-nos uma mensagem com o máximo de detalhes possível acerca do ocorrido, e nossa equipe
-                    avaliará o caso com cuidado e responsabilidade.
-                    <br>Seu relato é extremamente importante para nosso mapeamento de incidentes antissemitas pelo país.
-                </p>
+
+                <!-- DESCRIÇÃO DO MODAL PARA CONTEXTO ADICIONAL -->
+                <div id="modal-desc">
+                    <p>
+                        Se você testemunhou ou foi vítima de discriminação antissemita, estamos aqui para ajudar.
+                        <br>Envie-nos uma mensagem com o máximo de detalhes possível acerca do ocorrido, e nossa equipe
+                        avaliará o caso com cuidado e responsabilidade.
+                        <br>Seu relato é extremamente importante para nosso mapeamento de incidentes antissemitas pelo país.
+                    </p>
+                </div>
                 <div class="modal-contacts">
                     <div class="contact-item">
-                        <strong>📧 E-mail:</strong>
+
+                        <!-- EMOJI DECORATIVO COM ARIA-HIDDEN -->
+                        <strong><span aria-hidden="true">📧</span> E-mail:</strong>
+                        
                         <span>contato@kolenu.org.br</span>
                     </div>
                 </div>
