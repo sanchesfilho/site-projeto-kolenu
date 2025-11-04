@@ -39,7 +39,7 @@ site-projeto-kolenu/
 *- Arquivos HTML validados no W3C Validator*  
   
 **Entrega II:** *Estilização e Leiautes* (CSS3)  
-*- Sistema de design completo com variáveis CSS customizadas**  
+*- Sistema de design completo com variáveis CSS customizadas*
 *- Paleta de 11 cores, tipografia hierárquica (6 níveis), de espaçamento modular (6 níveis), breakpoints responsivos (5 níveis)*  
 *- CSS Grid (estrutura geral), Flexbox (componentes)*  
 *- Leiautes responsivos com CSS Grid para estrutura geral e Flexbox para componentes*  
@@ -90,7 +90,7 @@ site-projeto-kolenu/
 git clone https://github.com/sanchesfilho/site-projeto-kolenu
 
 ### Acesse o diretório
-cd projeto-kolenu
+cd site-projeto-kolenu
 
 ### Execute localmente
 abra o arquivo index.html
